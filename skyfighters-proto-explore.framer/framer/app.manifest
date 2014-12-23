@@ -1,10 +1,13 @@
 CACHE MANIFEST
-# 1419330454.552659
+# 1419332770.275413
 CACHE:
 /_server/server.js
+../.DS_Store
 ../.temp.html
 ../app.coffee
 ../framer/.bowerrc
+../framer/app.manifest
+../framer/backup.coffee
 ../framer/coffee-script.js
 ../framer/config.json
 ../framer/framer.generated.js
@@ -31,5 +34,10 @@ CACHE:
 ../images/framer-icon.png
 ../index.html
 ../offline.html
+../plugins/.DS_Store
+../plugins/hammer.fakemultitouch.js
+../plugins/hammer.js
+../plugins/hammer.min.js
+../plugins/hammer.min.map
 SETTINGS:
 prefer-online

@@ -1,4 +1,54 @@
-# Setup
+# Init multitouch event handling with Hammer 2
+# --------------------------------------------
+HammerEvents =
+	Tap: "tap"
+	DoubleTap: "doubletap"
+	Hold: "hold"
+	Touch: "touch"
+	Release: "release"
+	Gesture: "gesture"
+
+	Swipe: "swipe"
+	SwipeUp: "swipeup"
+	SwipeDown: "swipedown"
+	SwipeLeft: "swipeleft"
+	SwipeRight: "swiperight"
+	
+	Transform: "transform"
+	TransformStart: "transformstart"
+	TransformEnd: "transformend"
+
+	Rotate: "rotate"
+
+	Pinch: "pinch"
+	PinchIn: "pinchin"
+	PinchOut: "pinchout"
+	
+	Drag: "drag"
+	DragStart: "dragstart"
+	DragEnd: "dragend"
+
+# Add the Hammer events to the base Framer events
+window.Events = _.extend Events, HammerEvents
+
+# Patch the on method on layers to listen to Hammer events
+class HammerLayer extends Framer.Layer
+	on: (eventName, f) ->
+		if eventName in _.values(HammerEvents)
+			@ignoreEvents = false			
+			hammer = Hammer(@_element).on eventName, f
+		else
+			super eventName, f
+
+# Replace the default Layer with the HammerLayer
+window.Layer = HammerLayer
+
+# Enables a fake-Multitouch by holding the "Shift"-key
+Hammer.plugins.fakeMultitouch()
+
+
+# Setup & variables
+# -----------------
 
 cols = 4
 rows = 20
@@ -75,6 +125,10 @@ selectedCardsStack = new Layer
 	height: cardSpacing * 2 + selectedHeight
 	backgroundColor: "transparent"
 
+# Spread cardstack for history
+selectedCardsStack.on Events.Pinch, ->
+	#selectedCardsStack.scale = event.gesture.scale - 1
+	#print event.gesture.scale
 
 # Create a new grid layer
 # -----------------------
@@ -222,7 +276,7 @@ makePOILayer = (id, fromX, fromY, fromWidth, fromHeight, fromColor) ->
 #			gridLayers[id].bringToFront()
 			
 	# Arrange layer order
-	# ---
+	selectedCardsStack.bringToFront()
 
 
 makeInspirationLayer = () ->
