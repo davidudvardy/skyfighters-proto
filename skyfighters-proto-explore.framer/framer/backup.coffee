@@ -210,7 +210,7 @@ makePOILayer = (fromX, fromY, fromWidth, fromHeight, fromColor) ->
 				# center map on POI
 				mapContent.animate
 					properties:
-						x: map.width / 2 - poi.x - poiWidth / 2
+						x: map.width / 4 * 3 - poi.x - poiWidth / 2
 						y: map.height / 2 - poi.y - poiHeight / 2
 					time: 0.4
 				# create new canvas
@@ -252,6 +252,13 @@ makePOILayer = (fromX, fromY, fromWidth, fromHeight, fromColor) ->
 
 	# Hide selected & map if scrolled
 	relatedCardsGrid.on Events.Scroll, ->
+		if this.scrollY > 0
+			this.bringToFront()
+			navbar.bringToFront()
+		else
+			map.bringToFront()
+			selectedCardsStack.bringToFront()
+			navbar.bringToFront()
 		map.opacity = selectedCardsStack.opacity = Utils.modulate(relatedCardsGrid.scrollY, [0, cardSpacing * 2], [1, 0], true)
 		map.blur    = selectedCardsStack.blur    = Utils.modulate(relatedCardsGrid.scrollY, [0, cardSpacing * 2], [0, 10], true)
 
@@ -301,7 +308,7 @@ makeInspirationLayer = () ->
 				# center map on POI
 				mapContent.animate
 					properties:
-						x: map.width / 2 - poi.x - poiWidth / 2
+						x: map.width / 4 * 3 - poi.x - poiWidth / 2
 						y: map.height / 2 - poi.y - poiHeight / 2
 					time: 0.4
 				# create new canvas
