@@ -33,7 +33,7 @@ window.Events = _.extend Events, HammerEvents
 class HammerLayer extends Framer.Layer
 	on: (eventName, f) ->
 		if eventName in _.values(HammerEvents)
-			@ignoreEvents = false			
+			@ignoreEvents = false
 			hammer = Hammer(@_element).on eventName, f
 		else
 			super eventName, f
@@ -254,6 +254,15 @@ makePOILayer = (fromX, fromY, fromWidth, fromHeight, fromColor) ->
 	relatedCardsGrid.on Events.Scroll, ->
 		map.opacity = selectedCardsStack.opacity = Utils.modulate(relatedCardsGrid.scrollY, [0, cardSpacing * 2], [1, 0], true)
 		map.blur    = selectedCardsStack.blur    = Utils.modulate(relatedCardsGrid.scrollY, [0, cardSpacing * 2], [0, 10], true)
+		
+		# rearrange layers when scrolled
+		if relatedCardsGrid.scrollY > 0
+			relatedCardsGrid.bringToFront()
+			navbar.bringToFront()
+		else
+			map.bringToFront()
+			selectedCardsStack.bringToFront()
+			navbar.bringToFront()
 
 
 # Create initial inspiration board
