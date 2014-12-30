@@ -210,7 +210,7 @@ makePOILayer = (fromX, fromY, fromWidth, fromHeight, fromColor) ->
 				# center map on POI
 				mapContent.animate
 					properties:
-						x: map.width / 4 * 3 - poi.x - poiWidth / 2
+						x: map.width / 4 * 3 - cardSpacing / 2 - poi.x - poiWidth / 2
 						y: map.height / 2 - poi.y - poiHeight / 2
 					time: 0.4
 				# create new canvas
@@ -310,7 +310,7 @@ makeInspirationLayer = () ->
 				# center map on POI
 				mapContent.animate
 					properties:
-						x: map.width / 4 * 3 - poi.x - poiWidth / 2
+						x: map.width / 4 * 3 - cardSpacing / 2 - poi.x - poiWidth / 2
 						y: map.height / 2 - poi.y - poiHeight / 2
 					time: 0.4
 				# create new canvas
@@ -335,7 +335,7 @@ makeInspirationLayer = () ->
 			poi.on Events.Click, ->
 				mapContent.animate
 					properties:
-						x: map.width / 4 * 3 - this.x - poiWidth / 2
+						x: map.width / 4 * 3 - cardSpacing / 2 - this.x - poiWidth
 						y: map.height / 2 - this.y - poiHeight / 2
 					time: 0.4
 				makePOILayer(
