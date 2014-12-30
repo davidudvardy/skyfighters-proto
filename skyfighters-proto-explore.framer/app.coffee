@@ -238,11 +238,13 @@ makePOILayer = (fromX, fromY, fromWidth, fromHeight, fromColor) ->
 		this.superLayer = selectedCardsStack
 				
 	# Rotate a bit previous selected
+	r = Utils.randomNumber(-5, 5)
 	if selectedCards.length > 1
-		selectedCards[selectedCards.length - 2].animate
-			properties:
-				rotationZ: Utils.randomNumber(-5, 5)
-			curve: "spring(800,80,0)"
+		for i in [0..selectedCards.length - 2]
+			selectedCards[i].animate
+				properties:
+					rotationZ: selectedCards[i].rotationZ + r
+				curve: "spring(800,80,0)"
 
 	# Reveal related grid
 	Utils.delay 0.5, ->
