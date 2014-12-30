@@ -7,23 +7,18 @@ HammerEvents =
 	Touch: "touch"
 	Release: "release"
 	Gesture: "gesture"
-
 	Swipe: "swipe"
 	SwipeUp: "swipeup"
 	SwipeDown: "swipedown"
 	SwipeLeft: "swipeleft"
 	SwipeRight: "swiperight"
-	
 	Transform: "transform"
 	TransformStart: "transformstart"
 	TransformEnd: "transformend"
-
 	Rotate: "rotate"
-
 	Pinch: "pinch"
 	PinchIn: "pinchin"
 	PinchOut: "pinchout"
-	
 	Drag: "drag"
 	DragStart: "dragstart"
 	DragEnd: "dragend"
@@ -123,6 +118,25 @@ selectedCardsStack = new Layer
 
 # Spread cardstack for history
 selectedCardsStack.on Events.Pinch, ->
+	selectedRows = Math.floor(selectedCards.length / cols)
+	i = 0
+	selectedCardsStack.width = Screen.width
+	selectedCardsStack.height = Screen.height
+	relatedCardsGrid.opacity = 0.2
+	map.opacity = 0.2
+	
+	# arrange cards in grid
+	for row in [0..selectedRows]
+		for col in [0..cols - 1]
+			selectedCards[i].animate
+				properties:
+					width: cardWidth
+					height: cardHeight
+					rotationZ: 0
+					x: cardSpacing + col * (cardWidth + cardSpacing)
+					y: cardSpacing + row * (cardHeight + cardSpacing)
+			i++
+
 	#selectedCardsStack.scale = event.gesture.scale - 1
 	#print event.gesture.scale
 
@@ -134,22 +148,33 @@ makePOILayer = (fromX, fromY, fromWidth, fromHeight, fromColor) ->
 	
 	# Clone current grid for fade out animation
 	relatedCardsGridPrevious = relatedCardsGrid.copy()
+	relatedCardsGridPrevious.scrollY = relatedCardsGrid.scrollY
 	relatedCardsGridPrevious.animate
 		properties:
 			scale: 0.9
 			opacity: 0
 			blur: 80
+
 	relatedCardsGridPrevious.on Events.AnimationEnd, ->
 		relatedCardsGridPrevious.visible = false
 		relatedCardsGridPrevious.destroy()
+		#relatedCardsGrid.scrollY = 0
+
+		# Reveal related grid
+		Utils.delay 0.2, ->
+			grid.animate
+				properties:
+					y: selectedHeight + 2 * cardSpacing
+
 
 	# Reveal map
-	map.visible = true
-	map.animate
-		properties:
-			scale: 1
-			opacity: 1
-			blur: 0
+	if !map.visible
+		map.visible = true
+		map.animate
+			properties:
+				scale: 1
+				opacity: 1
+				blur: 0
 
 	# Reveal navbar
 	navbar.visible = true
@@ -164,12 +189,36 @@ makePOILayer = (fromX, fromY, fromWidth, fromHeight, fromColor) ->
 	
 	selected = selectedCards[selectedCards.length - 1]
 	
-	if fromWidth < cardWidth
-		selected.borderRadius = poiWidth / 2        # round edges if coming from a POI on map
+	if fromWidth < cardWidth                        # round edges if coming from a POI on map
+		selected.borderRadius = poiWidth / 2
 	
 	selected.shadowY = 2
 	selected.shadowBlur = 6
 	selected.shadowColor = "rgba(0,0,0,0.2)"
+
+	# Animate selected in position
+	selected.bringToFront()
+	selected.animate
+		properties:
+			x: selectedX
+			y: selectedY
+			width: selectedWidth
+			height: selectedHeight
+			borderRadius: 0
+			
+	# Add selected to stack when arrived in position
+	selected.on Events.AnimationEnd, ->
+		this.off Events.AnimationEnd
+		this.superLayer = selectedCardsStack
+				
+	# Rotate a bit all previous selected as a whole
+	r = Utils.randomNumber(-5, 5)
+	if selectedCards.length > 1
+		for i in [0..selectedCards.length - 2]
+			selectedCards[i].animate
+				properties:
+					rotationZ: selectedCards[i].rotationZ + r
+				curve: "spring(800,80,0)"
 
 	# Delete previous grid of cards
 	relatedCardsGrid.subLayers[0].destroy()
@@ -196,14 +245,15 @@ makePOILayer = (fromX, fromY, fromWidth, fromHeight, fromColor) ->
 			card.shadowBlur = 6
 			card.shadowColor = "rgba(0,0,0,0.2)"
 			
+			# Card click event handling
 			card.on Events.Click, ->
 				this.visible = false
 				# add POI to map for clicked card
 				poi = new Layer
 					width: poiWidth
 					height: poiHeight
-					x: Utils.randomNumber(0, mapContent.width)
-					y: Utils.randomNumber(0, mapContent.height)
+					x: Utils.randomNumber(poiWidth, mapContent.width - poiWidth)
+					y: Utils.randomNumber(poiHeight, mapContent.height - poiHeight)
 					superLayer: mapContent
 					backgroundColor: this.backgroundColor
 					borderRadius: poiWidth / 2
@@ -216,48 +266,18 @@ makePOILayer = (fromX, fromY, fromWidth, fromHeight, fromColor) ->
 				# create new canvas
 				makePOILayer(
 					this.x, 
-					relatedCardsGrid.scrollY + grid.y + this.y, 
+					-relatedCardsGrid.scrollY + grid.y + this.y, 
 					this.width, 
 					this.height, 
 					this.backgroundColor
 				)
-
-	# Animate selected in position
-	selected.bringToFront()
-	selected.animate
-		properties:
-			x: selectedX
-			y: selectedY
-			width: selectedWidth
-			height: selectedHeight
-			borderRadius: 0
-	
-	# Add selected to stack when arrived in position
-	selected.on Events.AnimationEnd, ->
-		this.off Events.AnimationEnd
-		this.superLayer = selectedCardsStack
-				
-	# Rotate a bit previous selected
-	r = Utils.randomNumber(-5, 5)
-	if selectedCards.length > 1
-		for i in [0..selectedCards.length - 2]
-			selectedCards[i].animate
-				properties:
-					rotationZ: selectedCards[i].rotationZ + r
-				curve: "spring(800,80,0)"
-
-	# Reveal related grid
-	Utils.delay 0.5, ->
-		grid.animate
-			properties:
-				y: selectedHeight + 2 * cardSpacing
 
 	# Hide selected & map if scrolled
 	relatedCardsGrid.on Events.Scroll, ->
 		map.opacity = selectedCardsStack.opacity = Utils.modulate(relatedCardsGrid.scrollY, [0, cardSpacing * 2], [1, 0], true)
 		map.blur    = selectedCardsStack.blur    = Utils.modulate(relatedCardsGrid.scrollY, [0, cardSpacing * 2], [0, 10], true)
 		
-		# rearrange layers when scrolled
+		# reorder layers when scrolled
 		if relatedCardsGrid.scrollY > 0
 			relatedCardsGrid.bringToFront()
 			navbar.bringToFront()
@@ -276,7 +296,7 @@ makeInspirationLayer = () ->
 	grid = new Layer
 		width: Screen.width
 		height: rows * (cardHeight + cardSpacing)
-		y: cardSpacing
+		y: Screen.height - (2 * cardSpacing + cardHeight / 2)
 		backgroundColor: "transparent"
 		superLayer: relatedCardsGrid
 				
@@ -304,8 +324,8 @@ makeInspirationLayer = () ->
 				poi = new Layer
 					width: poiWidth
 					height: poiHeight
-					x: Utils.randomNumber(0, mapContent.width)
-					y: Utils.randomNumber(0, mapContent.height)
+					x: Utils.randomNumber(poiWidth, mapContent.width - poiWidth)
+					y: Utils.randomNumber(poiHeight, mapContent.height - poiHeight)
 					superLayer: mapContent
 					backgroundColor: this.backgroundColor
 					borderRadius: poiWidth / 2
@@ -318,7 +338,7 @@ makeInspirationLayer = () ->
 				# create new canvas
 				makePOILayer(
 					this.x, 
-					relatedCardsGrid.scrollY + grid.y + this.y, 
+					-relatedCardsGrid.scrollY + grid.y + this.y, 
 					this.width, 
 					this.height, 
 					this.backgroundColor
