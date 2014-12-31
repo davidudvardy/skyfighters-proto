@@ -39,8 +39,10 @@ window.Layer = HammerLayer
 Hammer.plugins.fakeMultitouch()
 
 
-# Setup & variables
-# -----------------
+
+
+# Variables
+# ---------
 
 cols = 4
 rows = 20
@@ -57,6 +59,7 @@ selectedX = (Screen.width - (cardSpacing + 2 * selectedWidth)) / 2
 selectedY = cardSpacing
 poiWidth = 60 * dpiScale
 poiHeight = 60 * dpiScale
+selectedCardsStackIsSpread = false
 
 Framer.Device.fullScreen = true
 Framer.Defaults.Animation = {
@@ -66,6 +69,13 @@ Framer.Defaults.Animation = {
 
 bg = new BackgroundLayer
 	backgroundColor: "#f5f5f5"
+
+
+
+
+# Setup layers
+# ------------
+
 
 # Create main layers to hold card grids
 relatedCardsGrid = new Layer
@@ -110,6 +120,13 @@ navbar.shadowColor = "rgba(0,0,0,0.3)"
 navbar.centerX()
 navbar.html = "<div style='color: #ddd; font-size: 36px; padding: 30px;'>&#8592; Back</div>"
 
+
+
+
+# Selected cards stack
+# --------------------
+
+
 # Selected cards stack
 selectedCardsStack = new Layer
 	width: Screen.width / 2
@@ -117,32 +134,68 @@ selectedCardsStack = new Layer
 	backgroundColor: "transparent"
 
 # Spread cardstack for history
-selectedCardsStack.on Events.Pinch, ->
-	selectedRows = Math.floor(selectedCards.length / cols)
-	i = 0
-	selectedCardsStack.width = Screen.width
-	selectedCardsStack.height = Screen.height
-	relatedCardsGrid.opacity = 0.2
-	map.opacity = 0.2
-	
-	# arrange cards in grid
-	for row in [0..selectedRows]
-		for col in [0..cols - 1]
-			selectedCards[i].animate
-				properties:
-					width: cardWidth
-					height: cardHeight
-					rotationZ: 0
-					x: cardSpacing + col * (cardWidth + cardSpacing)
-					y: cardSpacing + row * (cardHeight + cardSpacing)
-			i++
-
-	#selectedCardsStack.scale = event.gesture.scale - 1
+selectedCardsStack.on Events.PinchOut, ->
 	#print event.gesture.scale
+	if !selectedCardsStackIsSpread
+#		selectedCardsStack.scroll = true
+		selectedCardsStack.off Events.PinchOut
+		selectedCardsStackIsSpread = true
+		selectedRows = Math.floor(selectedCards.length / cols)
+		i = 0
+
+		selectedCardsStack.width = Screen.width
+		selectedCardsStack.height = Screen.height
+		relatedCardsGrid.animate
+			properties: {opacity: 0; blur: 80}
+		map.animate
+			properties: {opacity: 0; blur: 80}
+		
+		# to grid
+		for row in [0..selectedRows]
+			for col in [0..cols - 1]
+				selectedCards[i].animate
+					properties:
+						width: cardWidth
+						height: cardHeight
+						rotationZ: 0
+						x: cardSpacing + col * (cardWidth + cardSpacing)
+						y: cardSpacing + row * (cardHeight + cardSpacing)
+				i++
+				
+# Listen to pinch in to close grid
+selectedCardsStack.on Events.PinchIn, ->
+	if selectedCardsStackIsSpread
+#		selectedCardsStack.scroll = false
+		selectedCardsStack.off Events.PinchIn
+		selectedCardsStackIsSpread = false
+
+		relatedCardsGrid.animate
+			properties: {opacity: 1; blur: 0}
+		map.animate
+			properties: {opacity: 1; blur: 0}
+		
+		# to stack
+		for card in selectedCards
+			card.animate
+				properties:
+					width: selectedWidth
+					height: selectedHeight
+					rotationZ: Utils.randomNumber(-5, 5)
+					x: selectedX
+					y: selectedY
+
+# Shrink selectedCardsStack's size after stacking animation is finished so it won't block related grid and map
+relatedCardsGrid.on Events.AnimationEnd, ->
+	if !selectedCardsStackIsSpread
+		selectedCardsStack.width = Screen.width / 2
+		selectedCardsStack.height = cardSpacing * 2 + selectedHeight
 
 
-# Create a new grid layer
-# -----------------------
+
+
+# Related grid layer
+# ------------------
+
 
 makePOILayer = (fromX, fromY, fromWidth, fromHeight, fromColor) ->
 	
@@ -283,6 +336,7 @@ makePOILayer = (fromX, fromY, fromWidth, fromHeight, fromColor) ->
 		
 		# reorder layers when scrolled
 		if relatedCardsGrid.scrollY > 0
+			selectedCardsStack.bringToFront()
 			relatedCardsGridPrevious.bringToFront()
 			relatedCardsGrid.bringToFront()
 			selected.bringToFront()
@@ -295,8 +349,11 @@ makePOILayer = (fromX, fromY, fromWidth, fromHeight, fromColor) ->
 			navbar.bringToFront()
 
 
-# Create initial inspiration board
-# --------------------------------
+
+
+# Inspiration grid layer
+# ----------------------
+
 
 makeInspirationLayer = () ->
 
@@ -386,5 +443,9 @@ makeInspirationLayer = () ->
 		
 	mapFader.image = "images/map_bottom_fader.png"
 		
+
+
+# Render UI
+# ---------
 
 makeInspirationLayer()
