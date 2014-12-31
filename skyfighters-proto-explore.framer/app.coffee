@@ -137,7 +137,6 @@ selectedCardsStack = new Layer
 selectedCardsStack.on Events.PinchOut, ->
 	#print event.gesture.scale
 	if !selectedCardsStackIsSpread
-#		selectedCardsStack.scroll = true
 		selectedCardsStack.off Events.PinchOut
 		selectedCardsStackIsSpread = true
 		selectedRows = Math.floor(selectedCards.length / cols)
@@ -160,12 +159,14 @@ selectedCardsStack.on Events.PinchOut, ->
 						rotationZ: 0
 						x: cardSpacing + col * (cardWidth + cardSpacing)
 						y: cardSpacing + row * (cardHeight + cardSpacing)
-				i++
+				if i + 1 == selectedCards.length
+					break
+				else
+					i++
 				
 # Listen to pinch in to close grid
 selectedCardsStack.on Events.PinchIn, ->
 	if selectedCardsStackIsSpread
-#		selectedCardsStack.scroll = false
 		selectedCardsStack.off Events.PinchIn
 		selectedCardsStackIsSpread = false
 
