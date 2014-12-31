@@ -149,6 +149,8 @@ makePOILayer = (fromX, fromY, fromWidth, fromHeight, fromColor) ->
 	# Clone current grid for fade out animation
 	relatedCardsGridPrevious = relatedCardsGrid.copy()
 	relatedCardsGridPrevious.scrollY = relatedCardsGrid.scrollY
+	relatedCardsGrid.scrollY = 0
+	relatedCardsGrid.visible = false
 	relatedCardsGridPrevious.animate
 		properties:
 			scale: 0.9
@@ -158,8 +160,8 @@ makePOILayer = (fromX, fromY, fromWidth, fromHeight, fromColor) ->
 	relatedCardsGridPrevious.on Events.AnimationEnd, ->
 		relatedCardsGridPrevious.visible = false
 		relatedCardsGridPrevious.destroy()
-		#relatedCardsGrid.scrollY = 0
-
+		relatedCardsGrid.visible = true
+		
 		# Reveal related grid
 		Utils.delay 0.2, ->
 			grid.animate
@@ -273,7 +275,7 @@ makePOILayer = (fromX, fromY, fromWidth, fromHeight, fromColor) ->
 				)
 
 	# Hide selected & map if scrolled
-	relatedCardsGrid.on Events.Scroll, ->
+	relatedCardsGrid.on Events.Scroll, ->		
 		map.opacity = selectedCardsStack.opacity = Utils.modulate(relatedCardsGrid.scrollY, [0, cardSpacing * 2], [1, 0], true)
 		map.blur    = selectedCardsStack.blur    = Utils.modulate(relatedCardsGrid.scrollY, [0, cardSpacing * 2], [0, 10], true)
 		

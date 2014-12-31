@@ -1,8 +1,7 @@
 CACHE MANIFEST
-# 1419963723.568746
+# 1420025703.570912
 CACHE:
 /_server/server.js
-../.DS_Store
 ../.temp.html
 ../app.coffee
 ../framer/.bowerrc
@@ -31,12 +30,10 @@ CACHE:
 ../framer/mirror.css
 ../framer/style.css
 ../framer/version
-../images/.DS_Store
 ../images/framer-icon.png
 ../images/map_bottom_fader.png
 ../index.html
 ../offline.html
-../plugins/.DS_Store
 ../plugins/hammer.fakemultitouch.js
 ../plugins/hammer.js
 ../plugins/hammer.min.js
