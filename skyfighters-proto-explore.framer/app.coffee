@@ -108,17 +108,17 @@ mapContent.draggable.enabled = true
 
 # Navbar
 navbar = new Layer
-	width: 400 * dpiScale
-	height: 90 * dpiScale
-	y: 10
+	width: 1200 * dpiScale
+	height: 100 * dpiScale
+	y: Screen.height / 3
 	backgroundColor: "white"
 	borderRadius: 10
-navbar.visible = false
 navbar.shadowY = 10
 navbar.shadowBlur = 20
 navbar.shadowColor = "rgba(0,0,0,0.3)"
 navbar.centerX()
-navbar.html = "<div style='color: #ddd; font-size: 36px; padding: 30px;'>&#8592; Back</div>"
+navbar.html = "<input type='text' value='Search destinations...' style='color: #ccc; border: solid 1px #333; width: 60%; padding: 10px; margin: 15px auto; display: block; font-size: 36px;  font-family: Helvetica;'>"
+#navbar.html = "<div style='color: #06f; font-size: 36px; padding: 30px; font-family: Helvetica;'>&lsaquo; Search</div>"
 
 
 
@@ -441,9 +441,19 @@ makeInspirationLayer = () ->
 		y: map.height - 200
 		backgroundColor: "transparent"
 		superLayer: map
-		
 	mapFader.image = "images/map_bottom_fader.png"
-		
+
+	# Move navbar to top if scrolled
+	relatedCardsGrid.on(Events.Scroll, onInspirationGridScrolled)
+
+
+# Stick navbar to top if inspiration grid was scrolled enough
+onInspirationGridScrolled = (event, layer) ->
+	navbar.y = Screen.height / 3 - this.scrollY / 2
+	if navbar.y < cardSpacing / 4
+		navbar.y = cardSpacing / 4
+		relatedCardsGrid.off(Events.Scroll, onInspirationGridScrolled)
+
 
 
 # Render UI
