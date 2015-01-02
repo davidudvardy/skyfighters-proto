@@ -59,7 +59,7 @@ selectedX = (Screen.width - (cardSpacing + 2 * selectedWidth)) / 2
 selectedY = cardSpacing
 poiWidth = 60 * dpiScale
 poiHeight = 60 * dpiScale
-selectedCardsStackIsSpread = false
+navbarY = cardSpacing / 4
 
 Framer.Device.fullScreen = true
 Framer.Defaults.Animation = {
@@ -133,63 +133,71 @@ selectedCardsStack = new Layer
 	height: cardSpacing * 2 + selectedHeight
 	backgroundColor: "transparent"
 
-# Spread cardstack for history
+# Listen to pinch out and expand if collapsed
 selectedCardsStack.on Events.PinchOut, ->
-	#print event.gesture.scale
-	if !selectedCardsStackIsSpread
-		selectedCardsStack.off Events.PinchOut
-		selectedCardsStackIsSpread = true
-		selectedRows = Math.floor(selectedCards.length / cols)
-		i = 0
+	selectedCardsStack.expanding = true
+	expandCardStack()
 
-		selectedCardsStack.width = Screen.width
-		selectedCardsStack.height = Screen.height
-		relatedCardsGrid.animate
-			properties: {opacity: 0; blur: 80}
-		map.animate
-			properties: {opacity: 0; blur: 80}
-		
-		# to grid
-		for row in [0..selectedRows]
-			for col in [0..cols - 1]
-				selectedCards[i].animate
-					properties:
-						width: cardWidth
-						height: cardHeight
-						rotationZ: 0
-						x: cardSpacing + col * (cardWidth + cardSpacing)
-						y: cardSpacing + row * (cardHeight + cardSpacing)
-				if i + 1 == selectedCards.length
-					break
-				else
-					i++
-				
-# Listen to pinch in to close grid
+# Listen to pinch in and collapse if expanded
 selectedCardsStack.on Events.PinchIn, ->
-	if selectedCardsStackIsSpread
-		selectedCardsStack.off Events.PinchIn
-		selectedCardsStackIsSpread = false
+	collapseCardStack()
 
-		relatedCardsGrid.animate
-			properties: {opacity: 1; blur: 0}
-		map.animate
-			properties: {opacity: 1; blur: 0}
-		
-		# to stack
-		for card in selectedCards
-			card.animate
+# Expand stack into grid
+expandCardStack = () ->
+	selectedRows = Math.floor(selectedCards.length / cols)
+	i = 0
+
+	selectedCardsStack.width = Screen.width
+	selectedCardsStack.height = Screen.height
+	relatedCardsGrid.animate
+		properties: {opacity: 0; blur: 80}
+	map.animate
+		properties: {opacity: 0; blur: 80}
+	
+	# to grid
+	for row in [0..selectedRows]
+		for col in [0..cols - 1]
+			# listen to card click to collapse
+			selectedCards[i].on(Events.Click, onSelectedCardClicked)
+			selectedCards[i].animate
 				properties:
-					width: selectedWidth
-					height: selectedHeight
-					rotationZ: Utils.randomNumber(-5, 5)
-					x: selectedX
-					y: selectedY
+					width: cardWidth
+					height: cardHeight
+					rotationZ: 0
+					x: cardSpacing + col * (cardWidth + cardSpacing)
+					y: cardSpacing + row * (cardHeight + cardSpacing)
+			if i + 1 == selectedCards.length
+				break
+			else
+				i++
 
-# Shrink selectedCardsStack's size after stacking animation is finished so it won't block related grid and map
-relatedCardsGrid.on Events.AnimationEnd, ->
-	if !selectedCardsStackIsSpread
-		selectedCardsStack.width = Screen.width / 2
-		selectedCardsStack.height = cardSpacing * 2 + selectedHeight
+# Collapse grid into stack with clicked selected on top if clicked
+onSelectedCardClicked = (event, layer) ->
+	# collapse on click only if not animating (expand/collapse finished) and we are in grid not stack (card is small)
+	if !layer.isAnimating && layer.width == cardWidth
+		layer.bringToFront()
+		collapseCardStack()
+				
+# Collapse grid into stack
+collapseCardStack = () ->
+	relatedCardsGrid.animate
+		properties: {opacity: 1; blur: 0}
+	map.animate
+		properties: {opacity: 1; blur: 0}
+	selectedCardsStack.animate
+		properties:
+			width: Screen.width / 2
+			height: cardSpacing * 2 + selectedHeight
+	
+	# to stack
+	for card in selectedCards
+		card.animate
+			properties:
+				width: selectedWidth
+				height: selectedHeight
+				rotationZ: Utils.randomNumber(-5, 5)
+				x: selectedX
+				y: selectedY
 
 
 
@@ -234,8 +242,11 @@ makePOILayer = (fromX, fromY, fromWidth, fromHeight, fromColor) ->
 				opacity: 1
 				blur: 0
 
-	# Reveal navbar
-	navbar.visible = true
+	# Move navbar to top if necessary
+	if navbar.y != navbarY
+		navbar.animate
+			properties: { y: navbarY }
+		relatedCardsGrid.off(Events.Scroll, onInspirationGridScrolled)
 	
 	# Create a new selected card to fly to position later, and position it above clicked POI or card
 	selectedCards[selectedCards.length] = new Layer
@@ -450,8 +461,8 @@ makeInspirationLayer = () ->
 # Stick navbar to top if inspiration grid was scrolled enough
 onInspirationGridScrolled = (event, layer) ->
 	navbar.y = Screen.height / 3 - this.scrollY / 2
-	if navbar.y < cardSpacing / 4
-		navbar.y = cardSpacing / 4
+	if navbar.y < navbarY
+		navbar.y = navbarY
 		relatedCardsGrid.off(Events.Scroll, onInspirationGridScrolled)
 
 
