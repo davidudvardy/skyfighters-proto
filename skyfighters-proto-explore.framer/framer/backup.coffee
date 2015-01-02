@@ -59,7 +59,7 @@ selectedX = (Screen.width - (cardSpacing + 2 * selectedWidth)) / 2
 selectedY = cardSpacing
 poiWidth = 60 * dpiScale
 poiHeight = 60 * dpiScale
-navbarY = cardSpacing / 4
+navigationY = cardSpacing / 4
 
 Framer.Device.fullScreen = true
 Framer.Defaults.Animation = {
@@ -77,11 +77,18 @@ bg = new BackgroundLayer
 # ------------
 
 
+# Explore
+Explore = new Layer
+	width: Screen.width
+	height: Screen.height
+	backgroundColor: "transparent"
+
 # Create main layers to hold card grids
 relatedCardsGrid = new Layer
 	width: Screen.width
 	height: Screen.height
 	backgroundColor: "transparent"
+	superLayer: Explore
 relatedCardsGrid.scroll = true
 
 selectedCards = []
@@ -96,6 +103,7 @@ map = new Layer
 	backgroundColor: "#F2EEE7"
 	scale: 1.2
 	opacity: 0
+	superLayer: Explore
 
 map.visible = false
 
@@ -106,19 +114,37 @@ mapContent = new Layer
 	backgroundColor: "transparent"
 mapContent.draggable.enabled = true
 
-# Navbar
-navbar = new Layer
+# Navigation
+Navigation = new Layer
 	width: 1200 * dpiScale
 	height: 100 * dpiScale
-	y: Screen.height / 3
+	y: Screen.height // 3
 	backgroundColor: "white"
 	borderRadius: 10
-navbar.shadowY = 10
-navbar.shadowBlur = 20
-navbar.shadowColor = "rgba(0,0,0,0.3)"
-navbar.centerX()
-navbar.html = "<input type='text' value='Search destinations...' style='color: #ccc; border: solid 1px #333; width: 60%; padding: 10px; margin: 15px auto; display: block; font-size: 36px;  font-family: Helvetica;'>"
-#navbar.html = "<div style='color: #06f; font-size: 36px; padding: 30px; font-family: Helvetica;'>&lsaquo; Search</div>"
+Navigation.shadowY = 10
+Navigation.shadowBlur = 20
+Navigation.shadowColor = "rgba(0,0,0,0.3)"
+Navigation.centerX()
+Navigation.html = "<input type='text' value='Search destinations...' style='color: #ccc; border: solid 1px #333; width: 60%; padding: 10px; margin: 15px auto; display: block; font-size: 36px;  font-family: Helvetica;'>"
+#Navigation.html = "<div style='color: #06f; font-size: 36px; padding: 30px; font-family: Helvetica;'>&lsaquo; Search</div>"
+Navigation.on Events.Click, ->
+	goto("dayview")
+
+
+
+
+# Navigation
+# ------
+
+
+goto = (target) ->
+	switch target
+		when "dayview"
+			Explore.animate
+				properties:
+					y: 200
+					blur: 80
+					opacity: 0
 
 
 
@@ -132,6 +158,7 @@ selectedCardsStack = new Layer
 	width: Screen.width / 2
 	height: cardSpacing * 2 + selectedHeight
 	backgroundColor: "transparent"
+	superLayer: Explore
 
 # Listen to pinch out and expand if collapsed
 selectedCardsStack.on Events.PinchOut, ->
@@ -144,7 +171,7 @@ selectedCardsStack.on Events.PinchIn, ->
 
 # Expand stack into grid
 expandCardStack = () ->
-	selectedRows = Math.floor(selectedCards.length / cols)
+	selectedRows = selectedCards.length // cols
 	i = 0
 
 	selectedCardsStack.width = Screen.width
@@ -156,7 +183,7 @@ expandCardStack = () ->
 	
 	# to grid
 	for row in [0..selectedRows]
-		for col in [0..cols - 1]
+		for col in [0...cols]
 			# listen to card click to collapse
 			selectedCards[i].on(Events.Click, onSelectedCardClicked)
 			selectedCards[i].animate
@@ -166,7 +193,7 @@ expandCardStack = () ->
 					rotationZ: 0
 					x: cardSpacing + col * (cardWidth + cardSpacing)
 					y: cardSpacing + row * (cardHeight + cardSpacing)
-			if i + 1 == selectedCards.length
+			if i + 1 is selectedCards.length
 				break
 			else
 				i++
@@ -174,7 +201,7 @@ expandCardStack = () ->
 # Collapse grid into stack with clicked selected on top if clicked
 onSelectedCardClicked = (event, layer) ->
 	# collapse on click only if not animating (expand/collapse finished) and we are in grid not stack (card is small)
-	if !layer.isAnimating && layer.width == cardWidth
+	if not layer.isAnimating and layer.width is cardWidth
 		layer.bringToFront()
 		collapseCardStack()
 				
@@ -234,7 +261,7 @@ makePOILayer = (fromX, fromY, fromWidth, fromHeight, fromColor) ->
 					y: selectedHeight + 2 * cardSpacing
 
 	# Reveal map
-	if !map.visible
+	unless map.visible
 		map.visible = true
 		map.animate
 			properties:
@@ -242,10 +269,10 @@ makePOILayer = (fromX, fromY, fromWidth, fromHeight, fromColor) ->
 				opacity: 1
 				blur: 0
 
-	# Move navbar to top if necessary
-	if navbar.y != navbarY
-		navbar.animate
-			properties: { y: navbarY }
+	# Move Navigation to top if necessary
+	if Navigation.y isnt navigationY
+		Navigation.animate
+			properties: { y: navigationY }
 		relatedCardsGrid.off(Events.Scroll, onInspirationGridScrolled)
 	
 	# Create a new selected card to fly to position later, and position it above clicked POI or card
@@ -255,11 +282,10 @@ makePOILayer = (fromX, fromY, fromWidth, fromHeight, fromColor) ->
 		x: fromX
 		y: fromY
 		backgroundColor: fromColor
+		superLayer: Explore
 	
 	selected = selectedCards[selectedCards.length - 1]
-	
-	if fromWidth < cardWidth                        # round edges if coming from a POI on map
-		selected.borderRadius = poiWidth / 2
+	selected.borderRadius = poiWidth / 2 if fromWidth < cardWidth         # round edges if coming from a POI on map
 	
 	selected.shadowY = 2
 	selected.shadowBlur = 6
@@ -277,8 +303,8 @@ makePOILayer = (fromX, fromY, fromWidth, fromHeight, fromColor) ->
 			
 	# Add selected to stack when arrived in position
 	selected.on Events.AnimationEnd, ->
-		this.off Events.AnimationEnd
-		this.superLayer = selectedCardsStack
+		@off Events.AnimationEnd
+		@superLayer = selectedCardsStack
 				
 	# Rotate a bit all previous selected as a whole
 	r = Utils.randomNumber(-5, 5)
@@ -316,7 +342,7 @@ makePOILayer = (fromX, fromY, fromWidth, fromHeight, fromColor) ->
 			
 			# Card click event handling
 			card.on Events.Click, ->
-				this.visible = false
+				@visible = false
 				# add POI to map for clicked card
 				poi = new Layer
 					width: poiWidth
@@ -334,11 +360,11 @@ makePOILayer = (fromX, fromY, fromWidth, fromHeight, fromColor) ->
 					time: 0.4
 				# create new canvas
 				makePOILayer(
-					this.x, 
-					-relatedCardsGrid.scrollY + grid.y + this.y, 
-					this.width, 
-					this.height, 
-					this.backgroundColor
+					@x, 
+					-relatedCardsGrid.scrollY + grid.y + @y, 
+					@width, 
+					@height, 
+					@backgroundColor
 				)
 
 	# Hide selected & map if scrolled
@@ -352,13 +378,13 @@ makePOILayer = (fromX, fromY, fromWidth, fromHeight, fromColor) ->
 			relatedCardsGridPrevious.bringToFront()
 			relatedCardsGrid.bringToFront()
 			selected.bringToFront()
-			navbar.bringToFront()
+			Navigation.bringToFront()
 		else
 			map.bringToFront()
 			selectedCardsStack.bringToFront()
 			relatedCardsGridPrevious.bringToFront()
 			selected.bringToFront()
-			navbar.bringToFront()
+			Navigation.bringToFront()
 
 
 
@@ -396,7 +422,7 @@ makeInspirationLayer = () ->
 			card.shadowColor = "rgba(0,0,0,0.2)"
 			
 			card.on Events.Click, ->
-				this.visible = false
+				@visible = false
 				# add POI to map for clicked card
 				poi = new Layer
 					width: poiWidth
@@ -404,7 +430,7 @@ makeInspirationLayer = () ->
 					x: Utils.randomNumber(poiWidth, mapContent.width - poiWidth)
 					y: Utils.randomNumber(poiHeight, mapContent.height - poiHeight)
 					superLayer: mapContent
-					backgroundColor: this.backgroundColor
+					backgroundColor: @backgroundColor
 					borderRadius: poiWidth / 2
 				# center map on POI
 				mapContent.animate
@@ -414,11 +440,11 @@ makeInspirationLayer = () ->
 					time: 0.4
 				# create new canvas
 				makePOILayer(
-					this.x, 
-					-relatedCardsGrid.scrollY + grid.y + this.y, 
-					this.width, 
-					this.height, 
-					this.backgroundColor
+					@x, 
+					-relatedCardsGrid.scrollY + grid.y + @y, 
+					@width, 
+					@height, 
+					@backgroundColor
 				)
 
 			# create initial set of POIs on map
@@ -434,15 +460,15 @@ makeInspirationLayer = () ->
 			poi.on Events.Click, ->
 				mapContent.animate
 					properties:
-						x: map.width / 4 * 3 - cardSpacing / 2 - this.x - poiWidth
-						y: map.height / 2 - this.y - poiHeight / 2
+						x: map.width / 4 * 3 - cardSpacing / 2 - @x - poiWidth
+						y: map.height / 2 - @y - poiHeight / 2
 					time: 0.4
 				makePOILayer(
-					map.x + mapContent.x + this.x, 
-					map.y + mapContent.y + this.y, 
-					this.width, 
-					this.height, 
-					this.backgroundColor
+					map.x + mapContent.x + @x, 
+					map.y + mapContent.y + @y, 
+					@width, 
+					@height, 
+					@backgroundColor
 				)
 	
 	# Add fader at the bottom of map
@@ -454,15 +480,15 @@ makeInspirationLayer = () ->
 		superLayer: map
 	mapFader.image = "images/map_bottom_fader.png"
 
-	# Move navbar to top if scrolled
+	# Move Navigation to top if scrolled
 	relatedCardsGrid.on(Events.Scroll, onInspirationGridScrolled)
 
 
-# Stick navbar to top if inspiration grid was scrolled enough
+# Stick Navigation to top if inspiration grid was scrolled enough
 onInspirationGridScrolled = (event, layer) ->
-	navbar.y = Screen.height / 3 - this.scrollY / 2
-	if navbar.y < navbarY
-		navbar.y = navbarY
+	Navigation.y = Screen.height / 3 - this.scrollY / 2
+	if Navigation.y < navigationY
+		Navigation.y = navigationY
 		relatedCardsGrid.off(Events.Scroll, onInspirationGridScrolled)
 
 
