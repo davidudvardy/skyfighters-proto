@@ -59,6 +59,7 @@ selectedX = (Screen.width - (cardSpacing + 2 * selectedWidth)) / 2
 selectedY = cardSpacing
 poiWidth = 60 * dpiScale
 poiHeight = 60 * dpiScale
+navigationOriginalY = Screen.height // 3
 navigationY = cardSpacing / 4
 
 Framer.Device.fullScreen = true
@@ -83,7 +84,7 @@ Explore = new Layer
 	height: Screen.height
 	backgroundColor: "transparent"
 
-# Create main layers to hold card grids
+# Create main layers to hold related card grids
 relatedCardsGrid = new Layer
 	width: Screen.width
 	height: Screen.height
@@ -119,16 +120,63 @@ Navigation = new Layer
 	width: 1200 * dpiScale
 	height: 100 * dpiScale
 	y: Screen.height // 3
-	backgroundColor: "white"
+	backgroundColor: "transparent"
 	borderRadius: 10
 Navigation.shadowY = 10
 Navigation.shadowBlur = 20
 Navigation.shadowColor = "rgba(0,0,0,0.3)"
 Navigation.centerX()
-Navigation.html = "<input type='text' value='Search destinations...' style='color: #ccc; border: solid 1px #333; width: 60%; padding: 10px; margin: 15px auto; display: block; font-size: 36px;  font-family: Helvetica;'>"
-#Navigation.html = "<div style='color: #06f; font-size: 36px; padding: 30px; font-family: Helvetica;'>&lsaquo; Search</div>"
-Navigation.on Events.Click, ->
+
+navbg = new Layer
+	width: 1200 * dpiScale
+	height: 100 * dpiScale
+	backgroundColor: "white"
+	borderRadius: 10
+	superLayer: Navigation
+
+searchForm = new Layer
+	width: 900 * dpiScale
+	height: 400 * dpiScale
+	x: 20 * dpiScale
+	y: 10 * dpiScale
+	backgroundColor: "#eee"
+	superLayer: Navigation
+
+searchButton = new Layer
+	width: 200 * dpiScale
+	height: 80 * dpiScale
+	x: 980 * dpiScale
+	y: 10 * dpiScale
+	backgroundColor: "#09f"
+	borderRadius: 10
+	superLayer: Navigation
+
+backToSearchButton = new Layer
+	width: 200 * dpiScale
+	height: 80 * dpiScale
+	x: 20 * dpiScale
+	y: 10 * dpiScale
+	backgroundColor: "transparent"
+	superLayer: Navigation
+
+navbarTitle = new Layer
+	width: 800 * dpiScale
+	height: 80 * dpiScale
+	x: 200 * dpiScale
+	y: 10 * dpiScale
+	backgroundColor: "transparent"
+	superLayer: Navigation
+
+searchForm.html = 	"""
+					<input type='text' value='Search destinations...' style='color: #ccc; border: solid 1px #333; width: 60%; font-size: 36px; font-family: Helvetica;'>
+					"""
+searchButton.html = "<span style='color: #fff; font-size: 36px; font-family: Helvetica;'>Search</span>"
+backToSearchButton.html = "<span style='color: #06f; font-size: 36px; font-family: Helvetica;'>&lsaquo; Search</span>"
+
+searchButton.on Events.Click, ->
 	goto("dayview")
+backToSearchButton.on Events.Click, ->
+	goto("home")
 
 
 
@@ -139,12 +187,48 @@ Navigation.on Events.Click, ->
 
 goto = (target) ->
 	switch target
+		when "home"
+			makeInspirationLayer()
+			Explore.animate
+				properties:
+					y: 0
+					blur: 0
+					opacity: 1
+			navbar("home")
+			Navigation.animate
+				properties: {y: navigationOriginalY}
+
 		when "dayview"
 			Explore.animate
 				properties:
 					y: 200
 					blur: 80
 					opacity: 0
+			navbar("dayview")
+			Navigation.animate
+				properties: {y: navigationY}
+
+navbar = (target) ->
+	switch target
+		when "home"
+			backToSearchButton.visible = false
+			searchForm.visible = true
+			searchButton.visible = true
+			navbarTitle.visible = false
+
+		when "dayview"
+			backToSearchButton.visible = true
+			searchForm.visible = false
+			searchButton.visible = false
+			navbarTitle.visible = true
+			navbarTitle.html = "<span style='color: #fff; font-size: 36px; font-family: Helvetica;'>Search</span>"
+
+		when "explore"
+			backToSearchButton.visible = true
+			searchForm.visible = false
+			searchButton.visible = false
+			navbarTitle.visible = true
+			navbarTitle.html = "Explore"
 
 
 
@@ -273,6 +357,7 @@ makePOILayer = (fromX, fromY, fromWidth, fromHeight, fromColor) ->
 	if Navigation.y isnt navigationY
 		Navigation.animate
 			properties: { y: navigationY }
+		navbar("explore")
 		relatedCardsGrid.off(Events.Scroll, onInspirationGridScrolled)
 	
 	# Create a new selected card to fly to position later, and position it above clicked POI or card
@@ -395,6 +480,14 @@ makePOILayer = (fromX, fromY, fromWidth, fromHeight, fromColor) ->
 
 makeInspirationLayer = () ->
 
+	# Reset
+	relatedCardsGrid.scrollY = 0
+	relatedCardsGrid.off(Events.Scroll, onInspirationGridScrolled)
+	map.visible = false
+	child.destroy() for child in relatedCardsGrid.subLayers
+	child.destroy() for child in selectedCardsStack.subLayers
+	child.destroy() for child in mapContent.subLayers
+
 	# Related cards container
 	grid = new Layer
 		width: Screen.width
@@ -487,13 +580,14 @@ makeInspirationLayer = () ->
 # Stick Navigation to top if inspiration grid was scrolled enough
 onInspirationGridScrolled = (event, layer) ->
 	Navigation.y = Screen.height / 3 - this.scrollY / 2
-	if Navigation.y < navigationY
+	if Navigation.y <= navigationY
 		Navigation.y = navigationY
 		relatedCardsGrid.off(Events.Scroll, onInspirationGridScrolled)
+		navbar("explore")
 
 
 
 # Render UI
 # ---------
 
-makeInspirationLayer()
+goto("home")
