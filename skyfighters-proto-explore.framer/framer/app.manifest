@@ -1,5 +1,5 @@
 CACHE MANIFEST
-# 1420423361.603562
+# 1420455800.313258
 CACHE:
 /_server/server.js
 ../.temp.html
@@ -38,5 +38,6 @@ CACHE:
 ../plugins/hammer.js
 ../plugins/hammer.min.js
 ../plugins/hammer.min.map
+../plugins/images.js
 SETTINGS:
 prefer-online

@@ -583,6 +583,7 @@ makeInspirationLayer = () ->
 				x: cardSpacing + col * (cardWidth + cardSpacing)
 				y: row * (cardHeight + cardSpacing)
 				superLayer: grid
+				image: getCardImage()
 				
 				# format cards
 				backgroundColor: Utils.randomColor()
