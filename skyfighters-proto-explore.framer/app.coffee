@@ -44,6 +44,10 @@ Hammer.plugins.fakeMultitouch()
 # Variables
 # ---------
 
+# original json: https://maps.googleapis.com/maps/api/place/textsearch/json?query=restaurants+in+Sydney&key=AIzaSyCZVfNWClFJBXGUELESnRJMkIKqpMpH0YM
+
+dribble = JSON.parse Utils.domLoadDataSync "http://jsonp.jit.su/?url=https%3A%2F%2Fmaps.googleapis.com%2Fmaps%2Fapi%2Fplace%2Ftextsearch%2Fjson%3Fquery%3Drestaurants%2Bin%2BSydney%26key%3DAIzaSyCZVfNWClFJBXGUELESnRJMkIKqpMpH0YM"
+
 cols = 4
 rows = 20
 if Utils.isMobile()
@@ -572,7 +576,7 @@ makeInspirationLayer = () ->
 		y: Screen.height - (2 * cardSpacing + cardHeight / 2)
 		backgroundColor: "transparent"
 		superLayer: relatedCardsGrid
-				
+
 	# Create grid of related cards
 	for row in [0..rows - 1]
 		for col in [0..cols - 1]
@@ -583,8 +587,8 @@ makeInspirationLayer = () ->
 				x: cardSpacing + col * (cardWidth + cardSpacing)
 				y: row * (cardHeight + cardSpacing)
 				superLayer: grid
-				image: getCardImage()
-				
+				image: makeImageUrl(row*4+col,dribble)
+	
 				# format cards
 				backgroundColor: Utils.randomColor()
 				
@@ -665,8 +669,6 @@ onInspirationGridScrolled = (event, layer) ->
 			navbar("explore")
 	if navbar.currentState is "home-search"
 		navbar("explore")
-
-
 
 
 # Render UI
