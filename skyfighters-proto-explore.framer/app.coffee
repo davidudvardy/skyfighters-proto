@@ -59,7 +59,7 @@ places5 = JSON.parse Utils.domLoadDataSync "http://jsonp.jit.su/?url=https%3A%2F
 places = [places1, places2, places3, places4, places5]
 
 cols = 4
-rows = 20
+rows = 10
 if Utils.isMobile()
 	dpiScale = 1
 else
@@ -101,21 +101,6 @@ Explore = new Layer
 	height: Screen.height
 	backgroundColor: "transparent"
 
-# Dayview (search results, matrix)
-Dayview = new Layer
-	width: Screen.width
-	height: Screen.height
-	y: -Screen.height
-	backgroundColor: "transparent"
-
-# Flights list container
-flightsList = new Layer
-	width: Screen.width
-	height: Screen.height
-	backgroundColor: "transparent"
-	superLayer: Dayview
-flightsList.scroll = true
-
 # Create main layers to hold related card grids
 relatedCardsGrid = new Layer
 	width: Screen.width
@@ -142,6 +127,9 @@ mapContent = new Layer
 	height: 4000
 	superLayer: map
 	backgroundColor: "transparent"
+	image: "images/map.jpg"
+mapContent.on Events.Drag, ->
+	
 mapContent.draggable.enabled = true
 
 # Navigation
@@ -267,16 +255,13 @@ goto = (target) ->
 			navbar("home")
 			Navigation.animate
 				properties: {y: navigationOriginalY}
-			Dayview.y = -Screen.height
 
 		when "home-search"
 			navbar("home-search")
 			Navigation.animate
 				properties: {y: navigationY}
-			Dayview.y = -Screen.height
 
 		when "dayview"
-			makeFlightsList()
 			Explore.animate
 				properties:
 					y: 200
@@ -285,7 +270,6 @@ goto = (target) ->
 			navbar("dayview")
 			Navigation.animate
 				properties: {y: navigationY}
-			Dayview.y = 0
 
 navbar = (target) ->
 	navbar.currentState = target
@@ -707,27 +691,7 @@ onInspirationGridScrolled = (event, layer) ->
 		navbar("explore")
 
 
-
-
-# Create search result list
-# -------------------------
-
-
-makeFlightsList = () ->
-	for i in [0..100]
-		flight = new Layer
-			width: 800
-			height: 200
-			x: (Screen.width - 800) // 2
-			y: i * (cardSpacing + 200)
-			superLayer: flightsList
-			backgroundColor: "white"			
-
-
-
-
 # Render UI
 # ---------
-
 
 goto("home")

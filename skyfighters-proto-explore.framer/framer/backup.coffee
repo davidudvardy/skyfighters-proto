@@ -59,7 +59,7 @@ places5 = JSON.parse Utils.domLoadDataSync "http://jsonp.jit.su/?url=https%3A%2F
 places = [places1, places2, places3, places4, places5]
 
 cols = 4
-rows = 20
+rows = 10
 if Utils.isMobile()
 	dpiScale = 1
 else
@@ -127,6 +127,9 @@ mapContent = new Layer
 	height: 4000
 	superLayer: map
 	backgroundColor: "transparent"
+	image: "images/map.jpg"
+mapContent.on Events.Drag, ->
+	
 mapContent.draggable.enabled = true
 
 # Navigation
