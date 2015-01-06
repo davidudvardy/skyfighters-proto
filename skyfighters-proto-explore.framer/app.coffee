@@ -104,6 +104,7 @@ flightsList = new Layer
 	height: Screen.height
 	backgroundColor: "transparent"
 	superLayer: Dayview
+flightsList.scroll = true
 
 # Create main layers to hold related card grids
 relatedCardsGrid = new Layer
@@ -256,11 +257,13 @@ goto = (target) ->
 			navbar("home")
 			Navigation.animate
 				properties: {y: navigationOriginalY}
+			Dayview.y = -Screen.height
 
 		when "home-search"
 			navbar("home-search")
 			Navigation.animate
 				properties: {y: navigationY}
+			Dayview.y = -Screen.height
 
 		when "dayview"
 			makeFlightsList()

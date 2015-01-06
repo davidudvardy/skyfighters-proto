@@ -1,11 +1,8 @@
 CACHE MANIFEST
-<<<<<<< Updated upstream
-# 1420480742.298517
-=======
-# 1420479222.790933
->>>>>>> Stashed changes
+# 1420536024.816757
 CACHE:
 /_server/server.js
+../.DS_Store
 ../.temp.html
 ../app.coffee
 ../framer/.bowerrc
