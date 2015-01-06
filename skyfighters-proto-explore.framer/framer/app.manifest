@@ -1,7 +1,7 @@
 CACHE MANIFEST
-# 1420539770.197638
 CACHE:
 /_server/server.js
+../.DS_Store
 ../.temp.html
 ../app.coffee
 ../framer/.bowerrc
