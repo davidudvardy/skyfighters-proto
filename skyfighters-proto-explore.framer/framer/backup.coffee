@@ -91,6 +91,20 @@ Explore = new Layer
 	height: Screen.height
 	backgroundColor: "transparent"
 
+# Dayview (search results, matrix)
+Dayview = new Layer
+	width: Screen.width
+	height: Screen.height
+	y: -Screen.height
+	backgroundColor: "transparent"
+
+# Flights list container
+flightsList = new Layer
+	width: Screen.width
+	height: Screen.height
+	backgroundColor: "transparent"
+	superLayer: Dayview
+
 # Create main layers to hold related card grids
 relatedCardsGrid = new Layer
 	width: Screen.width
@@ -249,6 +263,7 @@ goto = (target) ->
 				properties: {y: navigationY}
 
 		when "dayview"
+			makeFlightsList()
 			Explore.animate
 				properties:
 					y: 200
@@ -257,6 +272,7 @@ goto = (target) ->
 			navbar("dayview")
 			Navigation.animate
 				properties: {y: navigationY}
+			Dayview.y = 0
 
 navbar = (target) ->
 	navbar.currentState = target
@@ -671,7 +687,27 @@ onInspirationGridScrolled = (event, layer) ->
 		navbar("explore")
 
 
+
+
+# Create search result list
+# -------------------------
+
+
+makeFlightsList = () ->
+	for i in [0..100]
+		flight = new Layer
+			width: 800
+			height: 200
+			x: (Screen.width - 800) // 2
+			y: i * (cardSpacing + 200)
+			superLayer: flightsList
+			backgroundColor: "white"			
+
+
+
+
 # Render UI
 # ---------
+
 
 goto("home")

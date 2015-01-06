@@ -1,5 +1,9 @@
 CACHE MANIFEST
+<<<<<<< Updated upstream
 # 1420480742.298517
+=======
+# 1420479222.790933
+>>>>>>> Stashed changes
 CACHE:
 /_server/server.js
 ../.temp.html
