@@ -46,7 +46,17 @@ Hammer.plugins.fakeMultitouch()
 
 # original json: https://maps.googleapis.com/maps/api/place/textsearch/json?query=restaurants+in+Sydney&key=AIzaSyCZVfNWClFJBXGUELESnRJMkIKqpMpH0YM
 
-dribble = JSON.parse Utils.domLoadDataSync "http://jsonp.jit.su/?url=https%3A%2F%2Fmaps.googleapis.com%2Fmaps%2Fapi%2Fplace%2Ftextsearch%2Fjson%3Fquery%3Drestaurants%2Bin%2BSydney%26key%3DAIzaSyCZVfNWClFJBXGUELESnRJMkIKqpMpH0YM"
+places1 = JSON.parse Utils.domLoadDataSync "http://jsonp.jit.su/?url=https%3A%2F%2Fmaps.googleapis.com%2Fmaps%2Fapi%2Fplace%2Ftextsearch%2Fjson%3Fquery%3Drestaurants%2Bin%2BSydney%26key%3DAIzaSyCZVfNWClFJBXGUELESnRJMkIKqpMpH0YM"
+
+places2 = JSON.parse Utils.domLoadDataSync "http://jsonp.jit.su/?url=https%3A%2F%2Fmaps.googleapis.com%2Fmaps%2Fapi%2Fplace%2Ftextsearch%2Fjson%3Fquery%3Dmuseums%2Bin%2BEurope%26key%3DAIzaSyCZVfNWClFJBXGUELESnRJMkIKqpMpH0YM"
+
+places3 = JSON.parse Utils.domLoadDataSync "http://jsonp.jit.su/?url=https%3A%2F%2Fmaps.googleapis.com%2Fmaps%2Fapi%2Fplace%2Ftextsearch%2Fjson%3Fquery%3Dspas%2Bin%2BHungary%26key%3DAIzaSyCZVfNWClFJBXGUELESnRJMkIKqpMpH0YM"
+
+places4 = JSON.parse Utils.domLoadDataSync "http://jsonp.jit.su/?url=https%3A%2F%2Fmaps.googleapis.com%2Fmaps%2Fapi%2Fplace%2Ftextsearch%2Fjson%3Fquery%3Dcofee%2Bin%2BBudapest%26key%3DAIzaSyCZVfNWClFJBXGUELESnRJMkIKqpMpH0YM"
+
+places5 = JSON.parse Utils.domLoadDataSync "http://jsonp.jit.su/?url=https%3A%2F%2Fmaps.googleapis.com%2Fmaps%2Fapi%2Fplace%2Ftextsearch%2Fjson%3Fquery%3Dmuseums%2Bin%2BParis%26key%3DAIzaSyCZVfNWClFJBXGUELESnRJMkIKqpMpH0YM"
+
+places = [places1, places2, places3, places4, places5]
 
 cols = 4
 rows = 20
@@ -392,7 +402,7 @@ collapseCardStack = () ->
 # ------------------
 
 
-makePOILayer = (fromX, fromY, fromWidth, fromHeight, fromColor) ->
+makePOILayer = (fromX, fromY, fromWidth, fromHeight, fromColor, fromImage) ->
 	
 	# Clone current grid for fade out animation
 	relatedCardsGridPrevious = relatedCardsGrid.copy()
@@ -441,6 +451,7 @@ makePOILayer = (fromX, fromY, fromWidth, fromHeight, fromColor) ->
 		x: fromX
 		y: fromY
 		backgroundColor: fromColor
+		image: fromImage
 		superLayer: Explore
 	
 	selected = selectedCards[selectedCards.length - 1]
@@ -495,6 +506,8 @@ makePOILayer = (fromX, fromY, fromWidth, fromHeight, fromColor) ->
 				y: row * (cardHeight + cardSpacing)
 				superLayer: grid
 				backgroundColor: Utils.randomColor()
+				image: makeImageUrl(row*4+col, places[Math.floor(Math.random() * 5)])
+				
 			card.shadowY = 2
 			card.shadowBlur = 6
 			card.shadowColor = "rgba(0,0,0,0.2)"
@@ -523,7 +536,8 @@ makePOILayer = (fromX, fromY, fromWidth, fromHeight, fromColor) ->
 					-relatedCardsGrid.scrollY + grid.y + @y, 
 					@width, 
 					@height, 
-					@backgroundColor
+					@backgroundColor,
+					@image
 				)
 
 	# Hide selected & map if scrolled
@@ -587,7 +601,7 @@ makeInspirationLayer = () ->
 				x: cardSpacing + col * (cardWidth + cardSpacing)
 				y: row * (cardHeight + cardSpacing)
 				superLayer: grid
-				image: makeImageUrl(row*4+col,dribble)
+				image: makeImageUrl(row*4+col,places[Math.floor(Math.random() * 5)])
 	
 				# format cards
 				backgroundColor: Utils.randomColor()
@@ -619,7 +633,8 @@ makeInspirationLayer = () ->
 					-relatedCardsGrid.scrollY + grid.y + @y, 
 					@width, 
 					@height, 
-					@backgroundColor
+					@backgroundColor,
+					@image
 				)
 
 			# create initial set of POIs on map
@@ -630,6 +645,7 @@ makeInspirationLayer = () ->
 				y: Utils.randomNumber(0, mapContent.height)
 				superLayer: mapContent
 				backgroundColor: card.backgroundColor
+				image: card.image
 				borderRadius: poiWidth / 2
 				
 			poi.on Events.Click, ->
@@ -644,6 +660,7 @@ makeInspirationLayer = () ->
 					@width, 
 					@height, 
 					@backgroundColor
+					@image
 				)
 	
 	# Add fader at the bottom of map
