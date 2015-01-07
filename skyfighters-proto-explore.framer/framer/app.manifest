@@ -1,11 +1,12 @@
 CACHE MANIFEST
-# 1420622416.021808
+# 1420644137.238830
 CACHE:
 /_server/server.js
 ../.DS_Store
 ../.temp.html
 ../app.coffee
 ../framer/.bowerrc
+../framer/.DS_Store
 ../framer/app.manifest
 ../framer/backup.coffee
 ../framer/coffee-script.js

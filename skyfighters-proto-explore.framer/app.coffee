@@ -44,35 +44,24 @@ Hammer.plugins.fakeMultitouch()
 # Variables
 # ---------
 
-# original json: https://maps.googleapis.com/maps/api/place/textsearch/json?query=restaurants+in+Sydney&key=AIzaSyCZVfNWClFJBXGUELESnRJMkIKqpMpH0YM
-
-places1 = JSON.parse Utils.domLoadDataSync "http://jsonp.jit.su/?url=https%3A%2F%2Fmaps.googleapis.com%2Fmaps%2Fapi%2Fplace%2Ftextsearch%2Fjson%3Fquery%3Drestaurants%2Bin%2BSydney%26key%3DAIzaSyCZVfNWClFJBXGUELESnRJMkIKqpMpH0YM"
-
-places2 = JSON.parse Utils.domLoadDataSync "http://jsonp.jit.su/?url=https%3A%2F%2Fmaps.googleapis.com%2Fmaps%2Fapi%2Fplace%2Ftextsearch%2Fjson%3Fquery%3Dmuseums%2Bin%2BEurope%26key%3DAIzaSyCZVfNWClFJBXGUELESnRJMkIKqpMpH0YM"
-
-places3 = JSON.parse Utils.domLoadDataSync "http://jsonp.jit.su/?url=https%3A%2F%2Fmaps.googleapis.com%2Fmaps%2Fapi%2Fplace%2Ftextsearch%2Fjson%3Fquery%3Dspas%2Bin%2BHungary%26key%3DAIzaSyCZVfNWClFJBXGUELESnRJMkIKqpMpH0YM"
-
-places4 = JSON.parse Utils.domLoadDataSync "http://jsonp.jit.su/?url=https%3A%2F%2Fmaps.googleapis.com%2Fmaps%2Fapi%2Fplace%2Ftextsearch%2Fjson%3Fquery%3Dcofee%2Bin%2BBudapest%26key%3DAIzaSyCZVfNWClFJBXGUELESnRJMkIKqpMpH0YM"
-
-places5 = JSON.parse Utils.domLoadDataSync "http://jsonp.jit.su/?url=https%3A%2F%2Fmaps.googleapis.com%2Fmaps%2Fapi%2Fplace%2Ftextsearch%2Fjson%3Fquery%3Dmuseums%2Bin%2BParis%26key%3DAIzaSyCZVfNWClFJBXGUELESnRJMkIKqpMpH0YM"
-
-places = [places1, places2, places3, places4, places5]
+# load places data
+Data = JSON.parse Utils.domLoadDataSync "https://dl.dropboxusercontent.com/u/5975478/places.json"
 
 cols = 4
-rows = 10
+rows = Data.places.length // cols
 if Utils.isMobile()
 	dpiScale = 1
 else
 	dpiScale = 0.5
-cardWidth = 420 * dpiScale
-cardHeight = 315 * dpiScale
+cardWidth = 480
+cardHeight = 360
 cardSpacing = (Screen.width - cols * cardWidth) // 5
-selectedWidth = 700 * dpiScale
-selectedHeight = 600 * dpiScale
-selectedX = (Screen.width - (cardSpacing + 2 * selectedWidth)) // 2
-selectedY = cardSpacing
-poiWidth = 60 * dpiScale
-poiHeight = 60 * dpiScale
+selectedWidth = 1000
+selectedHeight = 750
+selectedY = (Screen.height - (cardHeight + cardSpacing + cardHeight // 2) - selectedHeight) // 2
+selectedX = selectedY
+poiWidth = 60
+poiHeight = 60
 navigationOriginalY = Screen.height // 3
 navigationY = cardSpacing // 4
 
@@ -127,7 +116,7 @@ relatedCardsGrid.scroll = true
 # Create map container
 map = new Layer
 	width: Screen.width
-	height: selectedHeight + 2 * cardSpacing
+	height: selectedHeight + 2 * selectedX
 	x: 0
 	y: 0
 	backgroundColor: "#F2EEE7"
@@ -142,8 +131,7 @@ mapContent = new Layer
 	height: 4000
 	superLayer: map
 	backgroundColor: "transparent"
-	image: "images/map.jpg"
-mapContent.on Events.Drag, ->
+#	image: "images/map.jpg"
 	
 mapContent.draggable.enabled = true
 
@@ -346,8 +334,8 @@ title = (label) ->
 
 # Selected cards stack
 selectedCardsStack = new Layer
-	width: Screen.width / 2
-	height: cardSpacing * 2 + selectedHeight
+	width: selectedX * 2 + selectedWidth
+	height: selectedY * 2 + selectedHeight
 	backgroundColor: "transparent"
 	superLayer: Explore
 
@@ -383,7 +371,7 @@ expandCardStack = () ->
 					height: cardHeight
 					rotationZ: 0
 					x: cardSpacing + col * (cardWidth + cardSpacing)
-					y: cardSpacing + row * (cardHeight + cardSpacing)
+					y: selectedY + row * (cardHeight + cardSpacing)
 			if i + 1 is selectedCards.length
 				break
 			else
@@ -404,8 +392,8 @@ collapseCardStack = () ->
 		properties: {opacity: 1; blur: 0}
 	selectedCardsStack.animate
 		properties:
-			width: Screen.width / 2
-			height: cardSpacing * 2 + selectedHeight
+			width: selectedX * 2 + selectedWidth
+			height: selectedY * 2 + selectedHeight
 	
 	# to stack
 	for card in selectedCards
@@ -449,7 +437,7 @@ makePOILayer = (fromX, fromY, fromWidth, fromHeight, fromColor, fromImage) ->
 		Utils.delay 0.2, ->
 			grid.animate
 				properties:
-					y: selectedHeight + 2 * cardSpacing
+					y: Screen.height - (cardHeight + cardSpacing + cardHeight // 2)
 
 	# Reveal map
 	unless map.visible
@@ -528,7 +516,7 @@ makePOILayer = (fromX, fromY, fromWidth, fromHeight, fromColor, fromImage) ->
 				y: row * (cardHeight + cardSpacing)
 				superLayer: grid
 				backgroundColor: Utils.randomColor()
-				image: makeImageUrl(row*4+col, places[Math.floor(Math.random() * 5)])
+				image: Data.places[row * 4 + col].image
 				
 			card.shadowY = 2
 			card.shadowBlur = 6
@@ -564,8 +552,8 @@ makePOILayer = (fromX, fromY, fromWidth, fromHeight, fromColor, fromImage) ->
 
 	# Hide selected & map if scrolled
 	relatedCardsGrid.on Events.Scroll, ->		
-		map.opacity = selectedCardsStack.opacity = Utils.modulate(relatedCardsGrid.scrollY, [0, cardSpacing * 2], [1, 0], true)
-		map.blur    = selectedCardsStack.blur    = Utils.modulate(relatedCardsGrid.scrollY, [0, cardSpacing * 2], [0, 10], true)
+		map.opacity = selectedCardsStack.opacity = Utils.modulate(relatedCardsGrid.scrollY, [0, cardHeight * 2], [1, 0], true)
+		map.blur    = selectedCardsStack.blur    = Utils.modulate(relatedCardsGrid.scrollY, [0, cardHeight * 2], [0, 10], true)
 		
 		# reorder layers when scrolled
 		if relatedCardsGrid.scrollY > 0
@@ -580,7 +568,7 @@ makePOILayer = (fromX, fromY, fromWidth, fromHeight, fromColor, fromImage) ->
 			relatedCardsGridPrevious.bringToFront()
 			selected.bringToFront()
 			Navigation.bringToFront()
-			
+
 #		for card in grid.subLayers
 #			card.ignoreEvents = true
 
@@ -601,8 +589,8 @@ makeInspirationLayer = () ->
 	child.destroy() for child in selectedCardsStack.subLayers
 	child.destroy() for child in mapContent.subLayers
 	selectedCards = []
-	selectedCardsStack.width = Screen.width / 2
-	selectedCardsStack.height = cardSpacing * 2 + selectedHeight
+	selectedCardsStack.width = selectedX * 2 + selectedWidth
+	selectedCardsStack.height = selectedY * 2 + selectedHeight
 	relatedCardsGrid.opacity = 1
 	relatedCardsGrid.blur = 0
 	map.opacity = 1
@@ -612,7 +600,7 @@ makeInspirationLayer = () ->
 	grid = new Layer
 		width: Screen.width
 		height: rows * (cardHeight + cardSpacing)
-		y: Screen.height - (2 * cardSpacing + cardHeight / 2)
+		y: Screen.height - (cardHeight // 1.5)
 		backgroundColor: "transparent"
 		superLayer: relatedCardsGrid
 
@@ -626,7 +614,7 @@ makeInspirationLayer = () ->
 				x: cardSpacing + col * (cardWidth + cardSpacing)
 				y: row * (cardHeight + cardSpacing)
 				superLayer: grid
-				image: makeImageUrl(row*4+col,places[Math.floor(Math.random() * 5)])
+				image: Data.places[row * 4 + col].image
 	
 				# format cards
 				backgroundColor: Utils.randomColor()
