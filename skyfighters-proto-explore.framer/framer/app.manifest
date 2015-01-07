@@ -1,5 +1,5 @@
 CACHE MANIFEST
-# 1420644137.238830
+# 1420648223.896466
 CACHE:
 /_server/server.js
 ../.DS_Store
@@ -32,6 +32,7 @@ CACHE:
 ../framer/mirror.css
 ../framer/style.css
 ../framer/version
+../images/.DS_Store
 ../images/framer-icon.png
 ../images/map.jpg
 ../images/map_bottom_fader.png

@@ -54,10 +54,11 @@ if Utils.isMobile()
 else
 	dpiScale = 0.5
 cardWidth = 480
-cardHeight = 360
+cardHeight = 520
 cardSpacing = (Screen.width - cols * cardWidth) // 5
-selectedWidth = 1000
-selectedHeight = 750
+selectedWidth = 800
+selectedHeight = 600
+footerHeight = 160
 selectedY = (Screen.height - (cardHeight + cardSpacing + cardHeight // 2) - selectedHeight) // 2
 selectedX = selectedY
 poiWidth = 60
@@ -131,7 +132,7 @@ mapContent = new Layer
 	height: 4000
 	superLayer: map
 	backgroundColor: "transparent"
-#	image: "images/map.jpg"
+	image: "images/map.jpg"
 	
 mapContent.draggable.enabled = true
 
@@ -243,7 +244,7 @@ searchForm.on Events.Click, ->
 
 
 # Navigation
-# ------
+# ----------
 
 
 goto = (target) ->
@@ -412,7 +413,7 @@ collapseCardStack = () ->
 # ------------------
 
 
-makePOILayer = (fromX, fromY, fromWidth, fromHeight, fromColor, fromImage) ->
+makePOILayer = (fromX, fromY, fromWidth, fromHeight, fromImage) ->
 	
 	# Clone current grid for fade out animation
 	relatedCardsGridPrevious = relatedCardsGrid.copy()
@@ -460,11 +461,31 @@ makePOILayer = (fromX, fromY, fromWidth, fromHeight, fromColor, fromImage) ->
 		height: fromHeight
 		x: fromX
 		y: fromY
-		backgroundColor: fromColor
-		image: fromImage
 		superLayer: Explore
-	
+		backgroundColor: "white"
+		borderRadius: 4
+
 	selected = selectedCards[selectedCards.length - 1]
+		
+	selected.borderRadius = poiWidth / 2 if fromWidth < cardWidth         # round edges if coming from a POI on map
+	
+	selected.shadowY = 2
+	selected.shadowBlur = 6
+	selected.shadowColor = "rgba(0,0,0,0.2)"
+	
+	imageContainer = new Layer
+		width: cardWidth
+		height: cardHeight - footerHeight
+		image: fromImage
+		superLayer: selected
+		
+	footer = new Layer
+		width: cardWidth
+		height: footerHeight
+		y: cardHeight - footerHeight
+		backgroundColor: "white"
+		superLayer: selected
+		
 	selected.borderRadius = poiWidth / 2 if fromWidth < cardWidth         # round edges if coming from a POI on map
 	
 	selected.shadowY = 2
@@ -480,6 +501,12 @@ makePOILayer = (fromX, fromY, fromWidth, fromHeight, fromColor, fromImage) ->
 			width: selectedWidth
 			height: selectedHeight
 			borderRadius: 0
+	imageContainer.animate
+		properties:
+			width: selectedWidth
+			height: selectedHeight - footerHeight
+	footer.y = selectedHeight - footerHeight
+	footer.width = selectedWidth
 			
 	# Add selected to stack when arrived in position
 	selected.on Events.AnimationEnd, ->
@@ -515,40 +542,65 @@ makePOILayer = (fromX, fromY, fromWidth, fromHeight, fromColor, fromImage) ->
 				x: cardSpacing + col * (cardWidth + cardSpacing)
 				y: row * (cardHeight + cardSpacing)
 				superLayer: grid
-				backgroundColor: Utils.randomColor()
-				image: Data.places[row * 4 + col].image
+				backgroundColor: "white"
+				borderRadius: 4
 				
 			card.shadowY = 2
 			card.shadowBlur = 6
 			card.shadowColor = "rgba(0,0,0,0.2)"
 			
+			imageContainer = new Layer
+				width: cardWidth
+				height: cardHeight - footerHeight
+				image: Data.places[row * 4 + col].image
+				superLayer: card
+				
+			footer = new Layer
+				width: cardWidth
+				height: footerHeight
+				y: cardHeight - footerHeight
+				backgroundColor: "white"
+				superLayer: card
+				
+			footertxt = "<div style='padding: 10px'><span style='color:#000;font-size:22px;'>"
+			footertxt += Data.places[row * 4 + col].title
+			footertxt += "</span><br><span style='color:#666;font-size:16px;line-height:16px'>"
+			footertxt += Data.places[row * 4 + col].location
+			footertxt += "</span></div>"
+			footer.html = footertxt
+		
 			# Card click event handling
-			card.on Events.Click, ->
-				@visible = false
-				# add POI to map for clicked card
-				poi = new Layer
-					width: poiWidth
-					height: poiHeight
-					x: Utils.randomNumber(poiWidth, mapContent.width - poiWidth)
-					y: Utils.randomNumber(poiHeight, mapContent.height - poiHeight)
-					superLayer: mapContent
-					backgroundColor: this.backgroundColor
-					borderRadius: poiWidth / 2
-				# center map on POI
-				mapContent.animate
-					properties:
-						x: map.width / 4 * 3 - cardSpacing / 2 - poi.x - poiWidth / 2
-						y: map.height / 2 - poi.y - poiHeight / 2
-					time: 0.4
-				# create new canvas
-				makePOILayer(
-					@x, 
-					-relatedCardsGrid.scrollY + grid.y + @y, 
-					@width, 
-					@height, 
-					@backgroundColor,
-					@image
-				)
+			scrolling = false
+			card.on Events.TouchStart, ->
+				scrolling = false
+			card.on Events.TouchMove, ->
+				scrolling = true
+			card.on Events.TouchEnd, ->
+				if not scrolling
+					@visible = false
+					# add POI to map for clicked card
+					poi = new Layer
+						width: poiWidth
+						height: poiHeight
+						x: Utils.randomNumber(poiWidth, mapContent.width - poiWidth)
+						y: Utils.randomNumber(poiHeight, mapContent.height - poiHeight)
+						superLayer: mapContent
+						backgroundColor: Utils.randomColor()
+						borderRadius: poiWidth / 2
+					# center map on POI
+					mapContent.animate
+						properties:
+							x: map.width / 4 * 3 - cardSpacing / 2 - poi.x - poiWidth / 2
+							y: map.height / 2 - poi.y - poiHeight / 2
+						time: 0.4
+					# create new canvas
+					makePOILayer(
+						@x, 
+						-relatedCardsGrid.scrollY + grid.y + @y, 
+						@width, 
+						@height, 
+						@subLayers[0].image
+					)
 
 	# Hide selected & map if scrolled
 	relatedCardsGrid.on Events.Scroll, ->		
@@ -608,47 +660,70 @@ makeInspirationLayer = () ->
 	for row in [0..rows - 1]
 		for col in [0..cols - 1]
 			card = new Layer
-				# size and position
 				width: cardWidth
 				height: cardHeight
 				x: cardSpacing + col * (cardWidth + cardSpacing)
 				y: row * (cardHeight + cardSpacing)
 				superLayer: grid
-				image: Data.places[row * 4 + col].image
-	
-				# format cards
-				backgroundColor: Utils.randomColor()
+				backgroundColor: "white"
+				borderRadius: 4
 				
 			card.shadowY = 2
 			card.shadowBlur = 6
 			card.shadowColor = "rgba(0,0,0,0.2)"
 			
-			card.on Events.Click, ->
-				@visible = false
-				# add POI to map for clicked card
-				poi = new Layer
-					width: poiWidth
-					height: poiHeight
-					x: Utils.randomNumber(poiWidth, mapContent.width - poiWidth)
-					y: Utils.randomNumber(poiHeight, mapContent.height - poiHeight)
-					superLayer: mapContent
-					backgroundColor: @backgroundColor
-					borderRadius: poiWidth / 2
-				# center map on POI
-				mapContent.animate
-					properties:
-						x: map.width / 4 * 3 - cardSpacing / 2 - poi.x - poiWidth / 2
-						y: map.height / 2 - poi.y - poiHeight / 2
-					time: 0.4
-				# create new canvas
-				makePOILayer(
-					@x, 
-					-relatedCardsGrid.scrollY + grid.y + @y, 
-					@width, 
-					@height, 
-					@backgroundColor,
-					@image
-				)
+			imageContainer = new Layer
+				width: cardWidth
+				height: cardHeight - footerHeight
+				image: Data.places[row * 4 + col].image
+				superLayer: card
+				
+			footer = new Layer
+				width: cardWidth
+				height: footerHeight
+				y: cardHeight - footerHeight
+				backgroundColor: "white"
+				superLayer: card
+				
+			footertxt = "<div style='padding: 10px'><span style='color:#000;font-size:22px;'>"
+			footertxt += Data.places[row * 4 + col].title
+			footertxt += "</span><br><span style='color:#666;font-size:16px;line-height:16px'>"
+			footertxt += Data.places[row * 4 + col].location
+			footertxt += "</span></div>"
+			footer.html = footertxt
+		
+			# Card click event handling
+			scrolling = false
+			card.on Events.TouchStart, ->
+				scrolling = false
+			card.on Events.TouchMove, ->
+				scrolling = true
+			card.on Events.TouchEnd, ->
+				if not scrolling
+					@visible = false
+					# add POI to map for clicked card
+					poi = new Layer
+						width: poiWidth
+						height: poiHeight
+						x: Utils.randomNumber(poiWidth, mapContent.width - poiWidth)
+						y: Utils.randomNumber(poiHeight, mapContent.height - poiHeight)
+						superLayer: mapContent
+						backgroundColor: Utils.randomColor()
+						borderRadius: poiWidth / 2
+					# center map on POI
+					mapContent.animate
+						properties:
+							x: map.width / 4 * 3 - cardSpacing / 2 - poi.x - poiWidth / 2
+							y: map.height / 2 - poi.y - poiHeight / 2
+						time: 0.4
+					# create new canvas
+					makePOILayer(
+						@x, 
+						-relatedCardsGrid.scrollY + grid.y + @y, 
+						@width, 
+						@height, 
+						@subLayers[0].image
+					)
 
 			# create initial set of POIs on map
 			poi = new Layer
@@ -657,7 +732,7 @@ makeInspirationLayer = () ->
 				x: Utils.randomNumber(0, mapContent.width)
 				y: Utils.randomNumber(0, mapContent.height)
 				superLayer: mapContent
-				backgroundColor: card.backgroundColor
+				backgroundColor: Utils.randomColor()
 				image: card.image
 				borderRadius: poiWidth / 2
 				
@@ -672,7 +747,6 @@ makeInspirationLayer = () ->
 					map.y + mapContent.y + @y, 
 					@width, 
 					@height, 
-					@backgroundColor
 					@image
 				)
 	
