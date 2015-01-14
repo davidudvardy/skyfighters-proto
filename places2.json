@@ -1,0 +1,329 @@
+{
+   "places" : [
+      {
+         "title" : "California Dreaming",
+         "image" : "http://media-cache-ak0.pinimg.com/736x/74/d9/a9/74d9a9d07996cb9270f02fbb00c0d083.jpg",
+         "description" : "",
+         "categories" : [ "California", "USA", "Road Trip" ],
+         "location" : "California, USA",
+         "lat" : 0,
+         "lon" : 0
+      },
+      {
+         "title" : "The most famous Portuguese Sweet Pastries: Pastéis de Belém",
+         "image" : "http://media-cache-ec0.pinimg.com/474x/6f/80/95/6f80951c4398e327cd4f286f8436f5e6.jpg",
+         "description" : "Taste the original in Belem, Lisbon, Portugal!",
+         "categories" : [ "food", "tips", "Portugal" ],
+         "location" : "Lisbon, Portugal",
+         "lat" : 0,
+         "lon" : 0
+      },
+      {
+         "title" : "Japanese photo diary for foodies",
+         "image" : "http://media-cache-ec0.pinimg.com/736x/be/71/71/be7171e756b4b8994c1e964a5d003010.jpg",
+         "description" : "Grilled oysters with eel on top from Miyajima, Japan",
+         "categories" : [ "Japan", "food", "Miyajima" ],
+         "location" : "Miyajima, Japan",
+         "lat" : 0,
+         "lon" : 0
+      },
+      {
+         "title" : "Lord Howe Island, Australia",
+         "image" : "http://media-cache-ec0.pinimg.com/736x/e8/51/6f/e8516f6c7096a6e8fd8988a594057797.jpg",
+         "description" : "",
+         "categories" : [ "Australia", "beach", "islands" ],
+         "location" : "Lord Howe Island, Australia",
+         "lat" : 0,
+         "lon" : 0
+      },
+      {
+         "title" : "European Vacations: Lake Garda, Lombardy",
+         "image" : "http://media-cache-ec0.pinimg.com/736x/84/2f/69/842f6942c1ce8bf75744d1866a4818a1.jpg",
+         "description" : "",
+         "categories" : [ "Europe", "Italy", "lakes" ],
+         "location" : "Lake Garda, Italy",
+         "lat" : 0,
+         "lon" : 0
+      },
+      {
+         "title" : "Discover New Zealand",
+         "image" : "http://media-cache-ak0.pinimg.com/736x/f5/89/24/f58924f523466cca275ae19f60be45ee.jpg",
+         "description" : "Hamner Springs, South Island",
+         "categories" : [ "New Zealand", "baths", "islands" ],
+         "location" : "South Island, New Zealand",
+         "lat" : 0,
+         "lon" : 0
+      },
+      {
+         "title" : "Awesome Winter Vacations: Stowe, Vermont",
+         "image" : "http://s3.r29static.com/bin/entry/94e/x,80/1335864/image.jpg",
+         "description" : "Though best known as one of the premier ski and snowboard destinations in the Northeast (and perfect for a quick weekend on the slopes), Stowe has much to offer the non-sports-oriented among us, as well.",
+         "categories" : [ "USA", "Vermont", "winter tips" ],
+         "location" : "Stowe, USA",
+         "lat" : 0,
+         "lon" : 0
+      },
+      {
+         "title" : "Paradise in India",
+         "image" : "http://media-cache-ak0.pinimg.com/474x/4e/f8/38/4ef838fd864c9c895c2d277b503a4f9a.jpg",
+         "description" : "Colva Beach, Goa",
+         "categories" : [ "India", "beach", "goa" ],
+         "location" : "Goa, India",
+         "lat" : 0,
+         "lon" : 0
+      },
+      {
+         "title" : "Amazing Asia: Baloons over Bagan",
+         "image" : "http://media-cache-ec0.pinimg.com/736x/64/ca/6a/64ca6aedcfdf46f31a8fb736225ae6d3.jpg",
+         "description" : "Bagan, Myanmar, ",
+         "categories" : [ "Asia", "Myanmar", "history" ],
+         "location" : "Bagan, Myanmar",
+         "lat" : 0,
+         "lon" : 0
+      },
+      {
+         "title" : "Fairy Tales in Asia",
+         "image" : "http://media-cache-ec0.pinimg.com/736x/42/67/48/4267480b6db591e3587742850ff882d4.jpg",
+         "description" : "Milky way, Song Saa Island, Cambodia",
+         "categories" : [ "Cambodia", "Asia", "islands" ],
+         "location" : "Cambodia",
+         "lat" : 0,
+         "lon" : 0
+      },
+      {
+         "title" : "Perfect Holiday in the Maldives",
+         "image" : "http://media-cache-ak0.pinimg.com/736x/2e/db/f4/2edbf4fb44ffec9669713fe9d9b18c56.jpg",
+         "description" : "Soneva Fushi Resort, Maldives",
+         "categories" : [ "Maldives", "beach", "vacation" ],
+         "location" : "Maldives",
+         "lat" : 0,
+         "lon" : 0
+      },      
+      {
+         "title" : "Explore Skandinavia",
+         "image" : "http://media-cache-ec0.pinimg.com/736x/cc/9f/27/cc9f27bbe1e9ac80df2744a05b244cd1.jpg",
+         "description" : "Twilight in Lofoten, Norway",
+         "categories" : [ "Norway", "Skandinavia", "Winter Tips" ],
+         "location" : "Lofoten, Norway",
+         "lat" : 0,
+         "lon" : 0
+      },
+      {
+         "title" : "Adventures in Asia",
+         "image" : "http://media-cache-ec0.pinimg.com/474x/7c/79/0e/7c790ef81155d82150e9b3fe4ee7d104.jpg",
+         "description" : "Long boats in Phi Phi Island, Thailand",
+         "categories" : [ "Thailand", "Adventure", "Asia" ],
+         "location" : "Phi Phi Island, Thailand",
+         "lat" : 0,
+         "lon" : 0
+      },
+      {
+         "title" : "Dream Hotels & Ocean Villas",
+         "image" : "http://media-cache-ak0.pinimg.com/736x/06/79/6b/06796bdfc387c375128da9d4e372e038.jpg",
+         "description" : "Ocean resort at the Maldives",
+         "categories" : [ "Maldives", "beach", "vacation" ],
+         "location" : "Maldives",
+         "lat" : 0,
+         "lon" : 0
+      },
+      {
+         "title" : "Discover the Secrets of Mexico",
+         "image" : "http://media-cache-ak0.pinimg.com/474x/c8/2b/6e/c82b6ec6c173200948ebf12f9006f76f.jpg",
+         "description" : "Floating down the river of Xcaret, Riviera Maya, Mexico",
+         "categories" : [ "Mexico", "Central America", "Adventures" ],
+         "location" : "Mexico",
+         "lat" : 0,
+         "lon" : 0
+      },
+      {
+         "title" : "Spectacular roads you need to drive on before you die",
+         "image" : "http://s3-ec.buzzfed.com/static/2013-11/enhanced/webdr05/14/16/grid-cell-18302-1384465010-14.jpg",
+         "description" : "The Great Ocean Road, Australia",
+         "categories" : [ "Australia", "Road Trips", "Adventures" ],
+         "location" : "Victoria, Australia",
+         "lat" : 0,
+         "lon" : 0
+      },
+      {
+         "title" : "Spectacular roads you need to drive on before you die",
+         "image" : "http://s3-ec.buzzfed.com/static/2013-11/enhanced/webdr06/14/14/enhanced-buzz-wide-31889-1384458204-19.jpg",
+         "description" : "Highway 101 & Pacific Coast Highway",
+         "categories" : [ "Road Trips", "USA", "Adventures" ],
+         "location" : "California, USA",
+         "lat" : 0,
+         "lon" : 0
+      },
+      {
+         "title" : "Find Peace in Asia",
+         "image" : "http://media-cache-ak0.pinimg.com/736x/03/aa/6b/03aa6b0f871417d1fb806339000bc708.jpg",
+         "description" : "Hanging Gardens, Ubud, Indonesia",
+         "categories" : [ "Indonesia", "Hotels", "Asia" ],
+         "location" : "Ubud, Indonesia",
+         "lat" : 0,
+         "lon" : 0
+      },
+      {
+         "title" : "Hot & Cold: the Magical Iceland",
+         "image" : "http://media-cache-ak0.pinimg.com/474x/ea/f7/67/eaf7673785f4e339128b114f1737d425.jpg",
+         "description" : "Blue Lagoon in Grindavík, Iceland",
+         "categories" : [ "Iceland", "islands", "vacation" ],
+         "location" : "Grindavík, Iceland",
+         "lat" : 0,
+         "lon" : 0
+      },
+      {
+         "title" : "Luxury in Turkey",
+         "image" : "http://media-cache-ak0.pinimg.com/736x/83/a6/84/83a6842ec40c5e4ad2cb20f7955b8489.jpg",
+         "description" : "Cleopatra's Pool, Pamukkale, Turkey",
+         "categories" : [ "Turkey", "baths", "vacation" ],
+         "location" : "Pamukkale, Turkey",
+         "lat" : 0,
+         "lon" : 0
+      },
+      {
+         "title" : "Where Africa Begins: Morocco",
+         "image" : "http://media-cache-ak0.pinimg.com/736x/1a/dc/28/1adc28fc0a3085c9019b65a66471beba.jpg",
+         "description" : "View from La Tangerina Hotel, Tangier, Morocco",
+         "categories" : [ "hotels", "Africa", "Morocco" ],
+         "location" : "Tangier, Morocco",
+         "lat" : 0,
+         "lon" : 0
+      },
+      {
+         "title" : "Spa in the Heart of the Forest",
+         "image" : "http://media-cache-ak0.pinimg.com/736x/77/5b/75/775b759df6d9d714b41a671b73ed403e.jpg",
+         "description" : "Umpqua hot springs, Oregon, USA",
+         "categories" : [ "USA", "vacation", "baths" ],
+         "location" : "Oregon, USA",
+         "lat" : 0,
+         "lon" : 0
+      },
+      {
+         "title" : "Honeymoon Paradise",
+         "image" : "http://media-cache-ec0.pinimg.com/736x/ef/e9/66/efe96642dace1b97482ca1d9df65e8c7.jpg",
+         "description" : "Discover the Maldives",
+         "categories" : [ "Maldives", "islands", "beach" ],
+         "location" : "Maldives",
+         "lat" : 0,
+         "lon" : 0
+      },
+      {
+         "title" : "Top 10: San Francisco",
+         "image" : "http://media-cache-ec0.pinimg.com/474x/99/20/d3/9920d379cd76fb83d94a2dfca792f1a9.jpg",
+         "description" : "From attractions to local food tips",
+         "categories" : [ "USA", "City Guides", "San Francisco" ],
+         "location" : "San Francisco, USA",
+         "lat" : 0,
+         "lon" : 0
+      },
+      {
+         "title" : "Island of Gods: Santorini",
+         "image" : "http://media-cache-ec0.pinimg.com/736x/8c/d0/88/8cd0881757408ff8c8a0985b1cea6cd6.jpg",
+         "description" : "View from the Grace Hotel, Santorini, Greece",
+         "categories" : [ "hotels", "Santorini", "Greece" ],
+         "location" : "Santorini, Greece",
+         "lat" : 0,
+         "lon" : 0
+      },
+      {
+         "title" : "The Magical Jordan",
+         "image" : "http://media-cache-ec0.pinimg.com/474x/9d/4f/80/9d4f80d853b84bc35f385ac4105f043e.jpg",
+         "description" : "Tunnel of light, Petra, Jordan",
+         "categories" : [ "Jordan", "Africa", "Petra" ],
+         "location" : "Petra, Jordan",
+         "lat" : 0,
+         "lon" : 0
+      },
+      {
+         "title" : "Top 10: India",
+         "image" : "http://media-cache-ak0.pinimg.com/736x/e7/ef/f4/e7eff4552bdd388f98e6bbf5c281d105.jpg",
+         "description" : "The Taj Mahal",
+         "categories" : [ "India", "Asia", "history" ],
+         "location" : "India",
+         "lat" : 0,
+         "lon" : 0
+      },
+      {
+         "title" : "Explore the Secrets of Greece",
+         "image" : "http://media-cache-ec0.pinimg.com/736x/cd/31/e1/cd31e1e7dda6475e15c228702058bc02.jpg",
+         "description" : "Streets of Nafplio, Peloponnese, Greece",
+         "categories" : [ "Greece", "Europe", "history" ],
+         "location" : "Nafplio, Greece",
+         "lat" : 0,
+         "lon" : 0
+      },
+      {
+         "title" : "The 21 most magical spots in Hawaii",
+         "image" : "http://i.huffpost.com/gen/1753941/thumbs/o-ROAD-TO-HANA-900.jpg?1",
+         "description" : "Some people may think Hawaii is overrated. We think it's home to magic; a place where you can find everything from rainbow trees to fiery water to beaches made of sea glass.",
+         "categories" : [ "Hawaii", "USA", "islands" ],
+         "location" : "Hawaii, USA",
+         "lat" : 0,
+         "lon" : 0
+      },
+      {
+         "title" : "The 21 most magical spots in Hawaii",
+         "image" : "http://i.huffpost.com/gen/1753951/thumbs/o-OHEO-GULCH-MAUI-900.jpg?4",
+         "description" : "Some people may think Hawaii is overrated. We think it's home to magic; a place where you can find everything from rainbow trees to fiery water to beaches made of sea glass.",
+         "categories" : [ "Hawaii", "USA", "islands" ],
+         "location" : "Hawaii, USA",
+         "lat" : 0,
+         "lon" : 0
+      },
+      {
+         "title" : "The 21 most magical spots in Hawaii",
+         "image" : "http://i.huffpost.com/gen/1753940/thumbs/o-NAPALI-COAST-900.jpg?3",
+         "description" : "Some people may think Hawaii is overrated. We think it's home to magic; a place where you can find everything from rainbow trees to fiery water to beaches made of sea glass.",
+         "categories" : [ "Hawaii", "USA", "accomodation" ],
+         "location" : "Hawaii, USA",
+         "lat" : 0,
+         "lon" : 0
+      },
+      {
+         "title" : "Romance in Tuscany",
+         "image" : "http://media-cache-ak0.pinimg.com/736x/9b/3d/41/9b3d41203552eb9cfa09b5a8fcf6845f.jpg",
+         "description" : "Montepulciano, Tuscany, Italy",
+         "categories" : [ "Italy", "Europe", "Romantic" ],
+         "location" : "Montepulciano, Italy",
+         "lat" : 0,
+         "lon" : 0
+      },
+      {
+         "title" : "Romance in Tuscany",
+         "image" : "http://media-cache-ak0.pinimg.com/736x/9b/3d/41/9b3d41203552eb9cfa09b5a8fcf6845f.jpg",
+         "description" : "Montepulciano, Tuscany, Italy",
+         "categories" : [ "Italy", "Europe", "Romantic" ],
+         "location" : "Montepulciano, Italy",
+         "lat" : 0,
+         "lon" : 0
+      },
+      {
+         "title" : "Adventures in Africa",
+         "image" : "http://media-cache-ec0.pinimg.com/474x/a6/86/6b/a6866bf6bb21bbe5cb03cb4ef797852d.jpg",
+         "description" : "The Pryamides of Giza, Egypt",
+         "categories" : [ "history", "Egypt", "Africa" ],
+         "location" : "Giza, Egypt",
+         "lat" : 0,
+         "lon" : 0
+      },
+      {
+         "title" : "25 free things to do in New York City",
+         "image" : "http://media-cache-ak0.pinimg.com/474x/c6/63/52/c663521ea986a7c9c5c1f85caaa34441.jpg",
+         "description" : "Looking for free things to do in New York City? New York City for free is indeed possible. 25 museums, attractions and more that are all free in NYC!",
+         "categories" : [ "New York", "USA", "City Guides" ],
+         "location" : "New York, USA",
+         "lat" : 0,
+         "lon" : 0
+      },
+      {
+         "title" : "Moon Bridge in Taipei",
+         "image" : "http://media-cache-ak0.pinimg.com/236x/3e/43/d9/3e43d9bced81698fdbaebea0401887e2.jpg",
+         "description" : "",
+         "categories" : [ "bridge", "architecture" ],
+         "location" : "Taipei, Taiwan",
+         "lat" : 0,
+         "lon" : 0
+      }
+   ],
+   "status" : "OK"
+}

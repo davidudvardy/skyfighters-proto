@@ -45,20 +45,17 @@ Hammer.plugins.fakeMultitouch()
 # ---------
 
 # load places data
-Data = JSON.parse Utils.domLoadDataSync "https://dl.dropboxusercontent.com/u/5975478/places.json"
+placesJSON = [ "https://dl.dropboxusercontent.com/u/5975478/places1.json", "https://dl.dropboxusercontent.com/u/5975478/places2.json", "https://dl.dropboxusercontent.com/u/5975478/places3.json" ]
+Data = JSON.parse Utils.domLoadDataSync Utils.randomChoice placesJSON
 
 cols = 4
 rows = Data.places.length // cols
-if Utils.isMobile()
-	dpiScale = 1
-else
-	dpiScale = 0.5
-cardWidth = 480
-cardHeight = 520
+cardWidth = 460
+cardHeight = 420
+footerHeight = 100
 cardSpacing = (Screen.width - cols * cardWidth) // 5
 selectedWidth = 800
-selectedHeight = 600
-footerHeight = 160
+selectedHeight = 700
 selectedY = (Screen.height - (cardHeight + cardSpacing + cardHeight // 2) - selectedHeight) // 2
 selectedX = selectedY
 poiWidth = 60
@@ -132,7 +129,7 @@ mapContent = new Layer
 	height: 4000
 	superLayer: map
 	backgroundColor: "transparent"
-	image: "images/map.jpg"
+#	image: "images/map.jpg"
 	
 mapContent.draggable.enabled = true
 
@@ -206,9 +203,9 @@ searchFormPassengers = new Layer
 	superLayer: searchForm
 
 searchButton = new Layer
-	width: 200
+	width: 170
 	height: 80
-	x: 980
+	x: 1010
 	y: 10
 	backgroundColor: "#09f"
 	borderRadius: 10
@@ -230,7 +227,8 @@ navbarTitle = new Layer
 	backgroundColor: "transparent"
 	superLayer: Navigation
 
-searchButton.html = "<div style='width: 200px; text-align: center; color: #fff; font-size: 36px;'>Search</div>"
+searchButton.style["padding"] = "25px"
+searchButton.html = "<span style='font-size: 36px;'>Search</span>"
 backToSearchButton.html = "<span style='color: #06f; font-size: 36px;'>&lsaquo; Search</span>"
 
 searchButton.on Events.Click, ->
@@ -373,6 +371,10 @@ expandCardStack = () ->
 					rotationZ: 0
 					x: cardSpacing + col * (cardWidth + cardSpacing)
 					y: selectedY + row * (cardHeight + cardSpacing)
+			selectedCards[i].subLayers[0].animate
+				properties:
+					width: cardWidth
+					height: cardHeight - footerHeight
 			if i + 1 is selectedCards.length
 				break
 			else
@@ -405,6 +407,10 @@ collapseCardStack = () ->
 				rotationZ: Utils.randomNumber(-5, 5)
 				x: selectedX
 				y: selectedY
+		card.subLayers[0].animate
+			properties:
+				width: selectedWidth
+				height: selectedHeight - footerHeight
 
 
 
@@ -413,7 +419,7 @@ collapseCardStack = () ->
 # ------------------
 
 
-makePOILayer = (fromX, fromY, fromWidth, fromHeight, fromImage) ->
+makePOILayer = (fromX, fromY, fromWidth, fromHeight, dataId) ->
 	
 	# Clone current grid for fade out animation
 	relatedCardsGridPrevious = relatedCardsGrid.copy()
@@ -476,15 +482,24 @@ makePOILayer = (fromX, fromY, fromWidth, fromHeight, fromImage) ->
 	imageContainer = new Layer
 		width: cardWidth
 		height: cardHeight - footerHeight
-		image: fromImage
+		image: Data.places[dataId].image
 		superLayer: selected
 		
 	footer = new Layer
 		width: cardWidth
-		height: footerHeight
+		height: footerHeight * 2
 		y: cardHeight - footerHeight
 		backgroundColor: "white"
 		superLayer: selected
+
+	footertxt = "<div style='padding: 10px'><span style='color:#000;font-weight:bold;font-size:32px;'>"
+	footertxt += Data.places[dataId].title
+	footertxt += "</span> <span style='color:#999;font-size:16px;'>"
+	footertxt += Data.places[dataId].location
+	footertxt += "</span><br><span style='color:#666;font-size:22px;'>"
+	footertxt += Data.places[dataId].description
+	footertxt += "</span></div>"
+	footer.html = footertxt
 		
 	selected.borderRadius = poiWidth / 2 if fromWidth < cardWidth         # round edges if coming from a POI on map
 	
@@ -493,7 +508,7 @@ makePOILayer = (fromX, fromY, fromWidth, fromHeight, fromImage) ->
 	selected.shadowColor = "rgba(0,0,0,0.2)"
 
 	# Animate selected in position
-	selected.bringToFront()
+	#selected.bringToFront()
 	selected.animate
 		properties:
 			x: selectedX
@@ -544,7 +559,8 @@ makePOILayer = (fromX, fromY, fromWidth, fromHeight, fromImage) ->
 				superLayer: grid
 				backgroundColor: "white"
 				borderRadius: 4
-				
+
+			card.dataId = row * cols + col
 			card.shadowY = 2
 			card.shadowBlur = 6
 			card.shadowColor = "rgba(0,0,0,0.2)"
@@ -552,7 +568,7 @@ makePOILayer = (fromX, fromY, fromWidth, fromHeight, fromImage) ->
 			imageContainer = new Layer
 				width: cardWidth
 				height: cardHeight - footerHeight
-				image: Data.places[row * 4 + col].image
+				image: Data.places[card.dataId].image
 				superLayer: card
 				
 			footer = new Layer
@@ -563,9 +579,9 @@ makePOILayer = (fromX, fromY, fromWidth, fromHeight, fromImage) ->
 				superLayer: card
 				
 			footertxt = "<div style='padding: 10px'><span style='color:#000;font-size:22px;'>"
-			footertxt += Data.places[row * 4 + col].title
+			footertxt += Data.places[card.dataId].title
 			footertxt += "</span><br><span style='color:#666;font-size:16px;line-height:16px'>"
-			footertxt += Data.places[row * 4 + col].location
+			footertxt += Data.places[card.dataId].location
 			footertxt += "</span></div>"
 			footer.html = footertxt
 		
@@ -599,9 +615,16 @@ makePOILayer = (fromX, fromY, fromWidth, fromHeight, fromImage) ->
 						-relatedCardsGrid.scrollY + grid.y + @y, 
 						@width, 
 						@height, 
-						@subLayers[0].image
+						@dataId
 					)
 
+	map.index = 1
+	selectedCardsStack.index = 2
+	relatedCardsGridPrevious.index = 3
+	relatedCardsGrid.index = 4
+	selected.index = 10
+	Navigation.index = 11
+	
 	# Hide selected & map if scrolled
 	relatedCardsGrid.on Events.Scroll, ->		
 		map.opacity = selectedCardsStack.opacity = Utils.modulate(relatedCardsGrid.scrollY, [0, cardHeight * 2], [1, 0], true)
@@ -609,20 +632,11 @@ makePOILayer = (fromX, fromY, fromWidth, fromHeight, fromImage) ->
 		
 		# reorder layers when scrolled
 		if relatedCardsGrid.scrollY > 0
-			selectedCardsStack.bringToFront()
-			relatedCardsGridPrevious.bringToFront()
-			relatedCardsGrid.bringToFront()
-			selected.bringToFront()
-			Navigation.bringToFront()
+			map.index = 1
+			selectedCardsStack.index = 2
 		else
-			map.bringToFront()
-			selectedCardsStack.bringToFront()
-			relatedCardsGridPrevious.bringToFront()
-			selected.bringToFront()
-			Navigation.bringToFront()
-
-#		for card in grid.subLayers
-#			card.ignoreEvents = true
+			map.index = 5
+			selectedCardsStack.index = 6
 
 
 
@@ -668,6 +682,7 @@ makeInspirationLayer = () ->
 				backgroundColor: "white"
 				borderRadius: 4
 				
+			card.dataId = row * cols + col
 			card.shadowY = 2
 			card.shadowBlur = 6
 			card.shadowColor = "rgba(0,0,0,0.2)"
@@ -675,7 +690,7 @@ makeInspirationLayer = () ->
 			imageContainer = new Layer
 				width: cardWidth
 				height: cardHeight - footerHeight
-				image: Data.places[row * 4 + col].image
+				image: Data.places[card.dataId].image
 				superLayer: card
 				
 			footer = new Layer
@@ -686,9 +701,9 @@ makeInspirationLayer = () ->
 				superLayer: card
 				
 			footertxt = "<div style='padding: 10px'><span style='color:#000;font-size:22px;'>"
-			footertxt += Data.places[row * 4 + col].title
+			footertxt += Data.places[card.dataId].title
 			footertxt += "</span><br><span style='color:#666;font-size:16px;line-height:16px'>"
-			footertxt += Data.places[row * 4 + col].location
+			footertxt += Data.places[card.dataId].location
 			footertxt += "</span></div>"
 			footer.html = footertxt
 		
@@ -722,7 +737,7 @@ makeInspirationLayer = () ->
 						-relatedCardsGrid.scrollY + grid.y + @y, 
 						@width, 
 						@height, 
-						@subLayers[0].image
+						@dataId
 					)
 
 			# create initial set of POIs on map
@@ -736,6 +751,7 @@ makeInspirationLayer = () ->
 				image: card.image
 				borderRadius: poiWidth / 2
 				
+			poi.dataId = card.dataId
 			poi.on Events.Click, ->
 				mapContent.animate
 					properties:
@@ -747,7 +763,7 @@ makeInspirationLayer = () ->
 					map.y + mapContent.y + @y, 
 					@width, 
 					@height, 
-					@image
+					@dataId
 				)
 	
 	# Add fader at the bottom of map

@@ -1,0 +1,401 @@
+{
+   "places" : [
+      {
+         "title" : "Zhangye Danxia landform",
+         "image" : "http://s3-ec.buzzfed.com/static/2013-11/enhanced/webdr05/7/16/enhanced-buzz-wide-7460-1383859235-18.jpg",
+         "description" : "The rainbow formation is the result of red sandstone and mineral deposits being laid down for over 24 million years, according to the Telegraph.",
+         "categories" : [ "nature", "mountains" ],
+         "location" : "Gansu, China",
+         "lat" : 0,
+         "lon" : 0
+      },
+      {
+         "title" : "The Great Blue Hole",
+         "image" : "http://s3-ec.buzzfed.com/static/2013-11/enhanced/webdr06/7/11/enhanced-buzz-wide-29092-1383841997-23.jpg",
+         "description" : "The Great Blue Hole is a submarine sinkhole off the coast of Belize. It’s one of the top scuba diving sites in the world and the water is more than 400 feet deep.",
+         "categories" : [ "nature", "see" ],
+         "location" : "Belize",
+         "lat" : 0,
+         "lon" : 0
+      },
+      {
+         "title" : "Tulip fields",
+         "image" : "http://s3-ec.buzzfed.com/static/2013-11/enhanced/webdr03/7/12/enhanced-buzz-wide-21811-1383843704-27.jpg",
+         "description" : "Many people often mistake Keukenhof, also known as the Garden of Europe, as the designated space of the tulip fields. However, these majestic fields are located just outside the garden and are mostly privately owned.",
+         "categories" : [ "nature", "flowers", "Netherlands" ],
+         "location" : "Netherlands",
+         "lat" : 0,
+         "lon" : 0
+      },
+      {
+         "title" : "The Hang Son Doong cave",
+         "image" : "http://s3-ec.buzzfed.com/static/2013-11/enhanced/webdr07/12/18/enhanced-buzz-wide-26352-1384298064-29.jpg",
+         "description" : "Son Doong is the world’s largest cave, created 2–5 million years ago. A half-mile block of 40-story buildings could fit inside it!",
+         "categories" : [ "nature", "mountains", "cave" ],
+         "location" : "Quang Binh Province, Vietnam",
+         "lat" : 0,
+         "lon" : 0
+      },
+      {
+         "title" : "Hitachi Seaside Park",
+         "image" : "http://s3-ec.buzzfed.com/static/2013-11/enhanced/webdr02/7/15/enhanced-buzz-wide-7860-1383857021-11.jpg",
+         "description" : "The park is in full bloom during spring and tourists often visit to see 4.5 million “baby blue-eyes” flowers blossom.",
+         "categories" : [ "nature", "flowers" ],
+         "location" : "Hitachinaka, Ibaraki, Japan",
+         "lat" : 0,
+         "lon" : 0
+      },
+      {
+         "title" : "Mendenhall Ice Caves",
+         "image" : "http://s3-ec.buzzfed.com/static/2013-11/enhanced/webdr03/7/16/enhanced-buzz-wide-7577-1383858647-15.jpg",
+         "description" : "The cave lies beneath the Mendenhall Glacier and it melts as you walk through it.",
+         "categories" : [ "nature", "mountains", "cave" ],
+         "location" : "Alaska, United States",
+         "lat" : 0,
+         "lon" : 0
+      },
+      {
+         "title" : "Victoria Falls",
+         "image" : "http://s3-ec.buzzfed.com/static/2013-11/enhanced/webdr01/8/11/enhanced-buzz-wide-1037-1383927624-31.jpg",
+         "description" : "This 354-foot waterfall lies at the border of Zambia and Zimbabwe and it is the widest waterfall in Africa. There’s also a famous feature on the Zambian side called the Devil’s Pool, which allows adventurous tourists to hang out at the edge of the falls.",
+         "categories" : [ "nature", "waterfall" ],
+         "location" : "Zimbabwe and Zambia, Africa",
+         "lat" : 0,
+         "lon" : 0
+      },
+      {
+         "title" : "Mount Roraima",
+         "image" : "http://s3-ec.buzzfed.com/static/2013-11/enhanced/webdr06/7/16/enhanced-buzz-wide-10310-1383861136-7.jpg",
+         "description" : "The incredible tabletop mountains are some of the oldest geological formations on the planet, dating back about 2 billion years ago. This was also part of the inspiration for Paradise Falls in Disney’s UP.",
+         "categories" : [ "nature", "mountains", "rainforest" ],
+         "location" : "Venezuela, Brazil, and Guyana",
+         "lat" : 0,
+         "lon" : 0
+      },
+      {
+         "title" : "Beachy Escapes",
+         "image" : "http://photos.cntraveler.com/2014/12/20/5494be291d0dfc7664104226_anantara-medjumbe-quirimbas-mozambique.jpg",
+         "description" : "Of the hundreds and hundreds of new hotel openings around the world in 2014, we've chosen our 101 most interesting.",
+         "categories" : [ "Hotels", "Tips", "Beach" ],
+         "location" : "BQuirimbas Archipelago, Mozambique",
+         "lat" : 0,
+         "lon" : 0
+      },
+      {
+         "title" : "Travel Bucket List: 10 Trips That Are Insanely Romantic",
+         "image" : "http://media-cache-ec0.pinimg.com/736x/ff/ad/89/ffad89d13f8676cf0646c076eb49ab26.jpg",
+         "description" : "Whether you're in a serious relationship or just taking full advantage of Cuffing Season, a getaway for two sounds pretty good right about now. Doesn't it?",
+         "categories" : [ "Romantic", "Tips", "Vacation" ],
+         "location" : "Lech Zürs am Arlberg, Austria",
+         "lat" : 0,
+         "lon" : 0
+      },
+      {
+         "title" : "The Ultimate Island Retreat: Yemaya Island Hideway, Nicaragua",
+         "image" : "http://photos.cntraveler.com/2014/12/20/549582d0a04fec57646f07e4_yemaya-island-hideaway-little-corn-island-nicaragua.jpg",
+         "description" : "Only 43 miles off the eastern coast of Nicaragua, on virtually untouched Little Corn Island, 16 beautifully designed cabanas all have direct access to beach and hammocks.",
+         "categories" : [ "Hotels", "Nicaragua", "Beach" ],
+         "location" : "Little Corn Island, Nicaragua",
+         "lat" : 0,
+         "lon" : 0
+      },
+      {
+         "title" : "Cape Weligama Resort: The Best of Sri Lanka",
+         "image" : "http://photos.cntraveler.com/2014/12/20/5494ca20a04fec57646f076c_cape-welligama-sri-lanka.jpg",
+         "description" : "oving east across the Indian Ocean to Sri Lanka, Cape Weligama represents the best of best of new about this island's full recovery from the 2004 tsunami.",
+         "categories" : [ "Sri Lanka", "Vacation", "Beach" ],
+         "location" : "Cape Weligama, Galle, Sri Lanka",
+         "lat" : 0,
+         "lon" : 0
+      },
+      {
+         "title" : "Rooms with Views: X2 River Kwai, Thailand",
+         "image" : "http://photos.cntraveler.com/2014/12/20/5494be291d0dfc7664104226_anantara-medjumbe-quirimbas-mozambique.jpg",
+         "description" : "Each room of this contemporary, 8-room designer enclave features panoramic views of the Kwai Noi River beneath a stunning, serene backdrop of mountain ranges and countryside.",
+         "categories" : [ "Hotels", "Tips", "Thailand" ],
+         "location" : "Kanchananburi, Thailand",
+         "lat" : 0,
+         "lon" : 0
+      },
+      {
+         "title" : "How to do the Holidays like a New Yorker",
+         "image" : "http://media-cache-ak0.pinimg.com/474x/46/83/49/468349b28906278b8cb8170cee3d56d7.jpg",
+         "description" : "4 places you most go in NYC before New Year's",
+         "categories" : [ "New York", "City Guides", "Tips" ],
+         "location" : "New York, USA",
+         "lat" : 0,
+         "lon" : 0
+      },
+      {
+         "title" : "The Most Romantic Cities in the World: Venice",
+         "image" : "http://media-cache-ec0.pinimg.com/736x/6c/e3/0e/6ce30ec7d697172a8be721f3816ee0fb.jpg",
+         "description" : "",
+         "categories" : [ "Italy", "Romantic", "City Guides" ],
+         "location" : "Venice, Italy",
+         "lat" : 0,
+         "lon" : 0
+      },
+      {
+         "title" : "Perfect Weekend Getaways: Amsterdam",
+         "image" : "http://media-cache-ak0.pinimg.com/474x/3d/a1/78/3da178995c6c399262a4da46cb1e8444.jpg",
+         "description" : "Prepare for an unforgettable time in the Netherlands.",
+         "categories" : [ "Amsterdam", "City Guides", "Europe" ],
+         "location" : "Amsterdam, The Netherlands",
+         "lat" : 0,
+         "lon" : 0
+      },
+      {
+         "title" : "Magic in Ecuador",
+         "image" : "http://media-cache-ak0.pinimg.com/474x/d3/ed/e2/d3ede2719487749c8389a2b6d4b3f076.jpg",
+         "description" : "You have to go to South America in 2015",
+         "categories" : [ "South America", "Ecuador", "vacation" ],
+         "location" : "Ecuador",
+         "lat" : 0,
+         "lon" : 0
+      },
+      {
+         "title" : "California Dreaming",
+         "image" : "http://media-cache-ak0.pinimg.com/736x/74/d9/a9/74d9a9d07996cb9270f02fbb00c0d083.jpg",
+         "description" : "",
+         "categories" : [ "California", "USA", "Road Trip" ],
+         "location" : "California, USA",
+         "lat" : 0,
+         "lon" : 0
+      },
+      {
+         "title" : "The most famous Portuguese Sweet Pastries: Pastéis de Belém",
+         "image" : "http://media-cache-ec0.pinimg.com/474x/6f/80/95/6f80951c4398e327cd4f286f8436f5e6.jpg",
+         "description" : "Taste the original in Belem, Lisbon, Portugal!",
+         "categories" : [ "food", "tips", "Portugal" ],
+         "location" : "Lisbon, Portugal",
+         "lat" : 0,
+         "lon" : 0
+      },
+      {
+         "title" : "Japanese photo diary for foodies",
+         "image" : "http://media-cache-ec0.pinimg.com/736x/be/71/71/be7171e756b4b8994c1e964a5d003010.jpg",
+         "description" : "Grilled oysters with eel on top from Miyajima, Japan",
+         "categories" : [ "Japan", "food", "Miyajima" ],
+         "location" : "Miyajima, Japan",
+         "lat" : 0,
+         "lon" : 0
+      },
+      {
+         "title" : "Lord Howe Island, Australia",
+         "image" : "http://media-cache-ec0.pinimg.com/736x/e8/51/6f/e8516f6c7096a6e8fd8988a594057797.jpg",
+         "description" : "",
+         "categories" : [ "Australia", "beach", "islands" ],
+         "location" : "Lord Howe Island, Australia",
+         "lat" : 0,
+         "lon" : 0
+      },
+      {
+         "title" : "European Vacations: Lake Garda, Lombardy",
+         "image" : "http://media-cache-ec0.pinimg.com/736x/84/2f/69/842f6942c1ce8bf75744d1866a4818a1.jpg",
+         "description" : "",
+         "categories" : [ "Europe", "Italy", "lakes" ],
+         "location" : "Lake Garda, Italy",
+         "lat" : 0,
+         "lon" : 0
+      },
+      {
+         "title" : "Discover New Zealand",
+         "image" : "http://media-cache-ak0.pinimg.com/736x/f5/89/24/f58924f523466cca275ae19f60be45ee.jpg",
+         "description" : "Hamner Springs, South Island",
+         "categories" : [ "New Zealand", "baths", "islands" ],
+         "location" : "South Island, New Zealand",
+         "lat" : 0,
+         "lon" : 0
+      },
+      {
+         "title" : "Awesome Winter Vacations: Stowe, Vermont",
+         "image" : "http://s3.r29static.com/bin/entry/94e/x,80/1335864/image.jpg",
+         "description" : "Though best known as one of the premier ski and snowboard destinations in the Northeast (and perfect for a quick weekend on the slopes), Stowe has much to offer the non-sports-oriented among us, as well.",
+         "categories" : [ "USA", "Vermont", "winter tips" ],
+         "location" : "Stowe, USA",
+         "lat" : 0,
+         "lon" : 0
+      },
+      {
+         "title" : "Paradise in India",
+         "image" : "http://media-cache-ak0.pinimg.com/474x/4e/f8/38/4ef838fd864c9c895c2d277b503a4f9a.jpg",
+         "description" : "Colva Beach, Goa",
+         "categories" : [ "India", "beach", "goa" ],
+         "location" : "Goa, India",
+         "lat" : 0,
+         "lon" : 0
+      },
+      {
+         "title" : "Amazing Asia: Baloons over Bagan",
+         "image" : "http://media-cache-ec0.pinimg.com/736x/64/ca/6a/64ca6aedcfdf46f31a8fb736225ae6d3.jpg",
+         "description" : "Bagan, Myanmar, ",
+         "categories" : [ "Asia", "Myanmar", "history" ],
+         "location" : "Bagan, Myanmar",
+         "lat" : 0,
+         "lon" : 0
+      },
+      {
+         "title" : "Fairy Tales in Asia",
+         "image" : "http://media-cache-ec0.pinimg.com/736x/42/67/48/4267480b6db591e3587742850ff882d4.jpg",
+         "description" : "Milky way, Song Saa Island, Cambodia",
+         "categories" : [ "Cambodia", "Asia", "islands" ],
+         "location" : "Cambodia",
+         "lat" : 0,
+         "lon" : 0
+      },
+      {
+         "title" : "Perfect Holiday in the Maldives",
+         "image" : "http://media-cache-ak0.pinimg.com/736x/2e/db/f4/2edbf4fb44ffec9669713fe9d9b18c56.jpg",
+         "description" : "Soneva Fushi Resort, Maldives",
+         "categories" : [ "Maldives", "beach", "vacation" ],
+         "location" : "Maldives",
+         "lat" : 0,
+         "lon" : 0
+      },
+      {
+         "title" : "Explore Skandinavia",
+         "image" : "http://media-cache-ec0.pinimg.com/736x/cc/9f/27/cc9f27bbe1e9ac80df2744a05b244cd1.jpg",
+         "description" : "Twilight in Lofoten, Norway",
+         "categories" : [ "Norway", "Skandinavia", "Winter Tips" ],
+         "location" : "Lofoten, Norway",
+         "lat" : 0,
+         "lon" : 0
+      },
+      {
+         "title" : "Adventures in Asia",
+         "image" : "http://media-cache-ec0.pinimg.com/474x/7c/79/0e/7c790ef81155d82150e9b3fe4ee7d104.jpg",
+         "description" : "Long boats in Phi Phi Island, Thailand",
+         "categories" : [ "Thailand", "Adventure", "Asia" ],
+         "location" : "Phi Phi Island, Thailand",
+         "lat" : 0,
+         "lon" : 0
+      },
+      {
+         "title" : "Dream Hotels & Ocean Villas",
+         "image" : "http://media-cache-ak0.pinimg.com/736x/06/79/6b/06796bdfc387c375128da9d4e372e038.jpg",
+         "description" : "Ocean resort at the Maldives",
+         "categories" : [ "Maldives", "beach", "vacation" ],
+         "location" : "Maldives",
+         "lat" : 0,
+         "lon" : 0
+      },
+      {
+         "title" : "Discover the Secrets of Mexico",
+         "image" : "http://media-cache-ak0.pinimg.com/474x/c8/2b/6e/c82b6ec6c173200948ebf12f9006f76f.jpg",
+         "description" : "Floating down the river of Xcaret, Riviera Maya, Mexico",
+         "categories" : [ "Mexico", "Central America", "Adventures" ],
+         "location" : "Mexico",
+         "lat" : 0,
+         "lon" : 0
+      },
+      {
+         "title" : "Spectacular roads you need to drive on before you die",
+         "image" : "http://s3-ec.buzzfed.com/static/2013-11/enhanced/webdr05/14/16/grid-cell-18302-1384465010-14.jpg",
+         "description" : "The Great Ocean Road, Australia",
+         "categories" : [ "Australia", "Road Trips", "Adventures" ],
+         "location" : "Victoria, Australia",
+         "lat" : 0,
+         "lon" : 0
+      },
+      {
+         "title" : "Spectacular roads you need to drive on before you die",
+         "image" : "http://s3-ec.buzzfed.com/static/2013-11/enhanced/webdr06/14/14/enhanced-buzz-wide-31889-1384458204-19.jpg",
+         "description" : "Highway 101 & Pacific Coast Highway",
+         "categories" : [ "Road Trips", "USA", "Adventures" ],
+         "location" : "California, USA",
+         "lat" : 0,
+         "lon" : 0
+      },
+      {
+         "title" : "Find Peace in Asia",
+         "image" : "http://media-cache-ak0.pinimg.com/736x/03/aa/6b/03aa6b0f871417d1fb806339000bc708.jpg",
+         "description" : "Hanging Gardens, Ubud, Indonesia",
+         "categories" : [ "Indonesia", "Hotels", "Asia" ],
+         "location" : "Ubud, Indonesia",
+         "lat" : 0,
+         "lon" : 0
+      },
+      {
+         "title" : "Hot & Cold: the Magical Iceland",
+         "image" : "http://media-cache-ak0.pinimg.com/474x/ea/f7/67/eaf7673785f4e339128b114f1737d425.jpg",
+         "description" : "Blue Lagoon in Grindavík, Iceland",
+         "categories" : [ "Iceland", "islands", "vacation" ],
+         "location" : "Grindavík, Iceland",
+         "lat" : 0,
+         "lon" : 0
+      },
+      {
+         "title" : "Luxury in Turkey",
+         "image" : "http://media-cache-ak0.pinimg.com/736x/83/a6/84/83a6842ec40c5e4ad2cb20f7955b8489.jpg",
+         "description" : "Cleopatra's Pool, Pamukkale, Turkey",
+         "categories" : [ "Turkey", "baths", "vacation" ],
+         "location" : "Pamukkale, Turkey",
+         "lat" : 0,
+         "lon" : 0
+      },
+      {
+         "title" : "Where Africa Begins: Morocco",
+         "image" : "http://media-cache-ak0.pinimg.com/736x/1a/dc/28/1adc28fc0a3085c9019b65a66471beba.jpg",
+         "description" : "View from La Tangerina Hotel, Tangier, Morocco",
+         "categories" : [ "hotels", "Africa", "Morocco" ],
+         "location" : "Tangier, Morocco",
+         "lat" : 0,
+         "lon" : 0
+      },
+      {
+         "title" : "Spa in the Heart of the Forest",
+         "image" : "http://media-cache-ak0.pinimg.com/736x/77/5b/75/775b759df6d9d714b41a671b73ed403e.jpg",
+         "description" : "Umpqua hot springs, Oregon, USA",
+         "categories" : [ "USA", "vacation", "baths" ],
+         "location" : "Oregon, USA",
+         "lat" : 0,
+         "lon" : 0
+      },
+      {
+         "title" : "A fascianting place to visit",
+         "image" : "http://media-cache-ak0.pinimg.com/236x/29/4e/86/294e86c24421a1afde0e8b278b7f3255.jpg",
+         "description" : "Bora Bora said to have emerged three million years back due to geological phenomenon and is mid way between a high island and atoll",
+         "categories" : [ "island", "flora" ],
+         "location" : "Bora Bora, France",
+         "lat" : 0,
+         "lon" : 0
+      },
+      {
+         "title" : "A fascianting place to visit",
+         "image" : "http://media-cache-ak0.pinimg.com/236x/29/4e/86/294e86c24421a1afde0e8b278b7f3255.jpg",
+         "description" : "Bora Bora said to have emerged three million years back due to geological phenomenon and is mid way between a high island and atoll",
+         "categories" : [ "island", "flora" ],
+         "location" : "Bora Bora, France",
+         "lat" : 0,
+         "lon" : 0
+      },
+      {
+         "title" : "The best city for book lovers",
+         "image" : "http://media-cache-ak0.pinimg.com/236x/ef/e9/54/efe95403096f749d544da16cad63895f.jpg",
+         "description" : " To honor one the author and his sacrifices, admirers celebrate Dostoyevsky Day in St. Petersburg. Held the first Saturday of every July, fans gather across the city to celebrate their hero.",
+         "categories" : [ "city", "book" ],
+         "location" : "St. Petersburg, Russia",
+         "lat" : 0,
+         "lon" : 0
+      },
+      {
+         "title" : "Explore Serengeti",
+         "image" : "http://media-cache-ak0.pinimg.com/236x/2a/4a/19/2a4a194db398d354af6f7d4dbb9cff18.jpg",
+         "description" : "The Serengeti hosts the largest terrestrial mammal migration in the world, which helps secure it as one of the Seven Natural Wonders of Africa and one of the ten natural travel wonders of the world.",
+         "categories" : [ "Africa", "fauna" ],
+         "location" : "Serengeti, Tanzania",
+         "lat" : 0,
+         "lon" : 0
+      },
+      {
+         "title" : "Moon Bridge in Taipei",
+         "image" : "http://media-cache-ak0.pinimg.com/236x/3e/43/d9/3e43d9bced81698fdbaebea0401887e2.jpg",
+         "description" : "",
+         "categories" : [ "bridge", "architecture" ],
+         "location" : "Taipei, Taiwan",
+         "lat" : 0,
+         "lon" : 0
+      }
+   ],
+   "status" : "OK"
+}

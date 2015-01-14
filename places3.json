@@ -1,0 +1,257 @@
+{
+   "places" : [
+      {
+         "title" : "Antarctic Ice Marathon",
+         "image" : "http://photos.cntraveler.com/2015/01/05/54aae7687d23454b52671cd1_antarctic-ice-marathon.jpg",
+         "description" : "For the last 11 years, a small group of intrepid, experienced runners show up for the Antarctic Ice Marathon, the only footrace within the Antarctic circle",
+         "categories" : [ "Antarctica", "Adventure", "South Pole" ],
+         "location" : "Antarctica",
+         "lat" : 0,
+         "lon" : 0
+      },
+      {
+         "title" : "Warm Places We'd Rather Be Right Now: Mauritius",
+         "image" : "http://photos.cntraveler.com/2014/12/16/5490ad94b6e03e8c2d0cd959_4-mauritius-cr-superstock-alamy.jpg",
+         "description" : "With turquoise lagoons and marine life-rich sea, no wonder Mauritius wants to protect its environment, its biggest tourist draw.",
+         "categories" : [ "Mauritius", "islands", "Africa" ],
+         "location" : "Mauritius",
+         "lat" : 0,
+         "lon" : 0
+      },
+      {
+         "title" : "Warm Places We'd Rather Be Right Now: Palawan",
+         "image" : "http://photos.cntraveler.com/2015/01/06/54ac19b9672c13a9488d11cc_54383414f2f192ac5aefe715_hammock-el-nido-palawan7.jpg",
+         "description" : "It’s time to turn the spotlight on the Philippines, El Nido in Palawan Island.",
+         "categories" : [ "Asia", "Palawan", "Philippines" ],
+         "location" : "Palawan, Philippines",
+         "lat" : 0,
+         "lon" : 0
+      },
+      {
+         "title" : "Warm Places We'd Rather Be Right Now: Portugal",
+         "image" : "http://photos.cntraveler.com/2014/08/07/53e3022fc2d3f39d3610f1e9_comporta-restaurant-beach.jpg",
+         "description" : "The sleepy fishing villages of Portugal’s Herdade da Comporta have always been where the fashionable European crowd goes off the grid.",
+         "categories" : [ "Portugal", "Europe", "Vacation" ],
+         "location" : "Comporta, Portugal",
+         "lat" : 0,
+         "lon" : 0
+      },
+      {
+         "title" : "Dangerous Places That Are Actually Safe to Visit: Rio de Janeiro",
+         "image" : "http://photos.cntraveler.com/2014/08/06/53e2e83bc2d3f39d3610931f_rio-de-janeiro-pet-friendly-beach.jpg",
+         "description" : "Today, in the wake of the World Cup and reforms under President Dilma Rousseff, Rio is transformed.",
+         "categories" : [ "South America", "Rio de Janeiro", "City Guides" ],
+         "location" : "Rio de Janeiro, Brazil",
+         "lat" : 0,
+         "lon" : 0
+      },
+      {
+         "title" : "Discovering the New San Juan",
+         "image" : "http://photos.cntraveler.com/2014/08/07/53e30116c2d3f39d3610ed3b_san-juan-peurto-rico-travel-guide.jpg",
+         "description" : "Lost in the backstreets of San Juan, we find a very different city on the rise.",
+         "categories" : [ "South America", "Puerto Rico", "City Guides" ],
+         "location" : "San Juan, Puerto Rico",
+         "lat" : 0,
+         "lon" : 0
+      },
+      {
+         "title" : "Warm Places We'd Rather Be Right Now: Oahu, Hawaii",
+         "image" : "http://photos.cntraveler.com/2014/08/01/53db242d6dec627b14a1d175_5-oahu-kailua-bay-hawaii.jpg",
+         "description" : "The most visited of Hawaii’s islands, Oahu is the seat of the state capital, Honolulu, and also the site of historic Pearl Harbor.",
+         "categories" : [ "Hawaii", "islands", "vacation" ],
+         "location" : "Oahu, Hawaii",
+         "lat" : 0,
+         "lon" : 0
+      },
+      {
+         "title" : "Riding Camelback: A Sahara Desert Vacation",
+         "image" : "http://photos.cntraveler.com/2014/12/15/548ef32b860c74c1162c9766_Sahara-Desert-Safari-Slide-20.jpg",
+         "description" : "The Sahara Desert stretches for 3.5 million scorched square miles—and we wanted to experience it as ancient traders did: sitting astride a camel and sleeping under the stars.",
+         "categories" : [ "Africa", "Sahara", "vacation" ],
+         "location" : "Africa",
+         "lat" : 0,
+         "lon" : 0
+      },
+      {
+         "title" : "The Seductively Sleepy Islands of Bocas del Toro, Panama",
+         "image" : "http://photos.cntraveler.com/2014/07/31/53dab65f6dec627b149fd39d_hotel-bocas-del-toro-0113.jpg",
+         "description" : "Columbus landed there. Graham Greene made it on his third try. Our reporter, Peter Stevenson fell under the laid-back spell of the islands of the Bocas del Toro.",
+         "categories" : [ "Panama", "Central America", "islands" ],
+         "location" : "Panama",
+         "lat" : 0,
+         "lon" : 0
+      },
+      {
+         "title" : "Southern Africa's Beaches and Safari Camps",
+         "image" : "http://photos.cntraveler.com/2014/07/31/53dab3876dec627b149fc747_azura-benguerra-beach-bed-africa.jpg",
+         "description" : "Benguerra Island, Mozambique",
+         "categories" : [ "Africa", "hotels", "Mozambique" ],
+         "location" : "Benguerra Island, Mozambique",
+         "lat" : 0,
+         "lon" : 0
+      },
+      {
+         "title" : "19 Under-the-Radar Beaches You Should Visit",
+         "image" : "http://media-cache-ak0.pinimg.com/736x/74/d9/a9/74d9a9d07996cb9270f02fbb00c0d083.jpg",
+         "description" : "El Matador Beach, Los Angeles",
+         "categories" : [ "USA", "Los Angeles", "beach" ],
+         "location" : "Los Angeles, USA",
+         "lat" : 0,
+         "lon" : 0
+      },
+      {
+         "title" : "Exotic Vacations: Rajasthan, India",
+         "image" : "http://photos.cntraveler.com/2015/01/06/54ac345a7d23454b52672607_53da7cae6dec627b149ed678_lakshman-sagar-india-0213.jpg",
+         "description" : "The plains of Rajasthan stretch out in every direction from Lakshman Sagar, a nineteenth-century nobleman's hunting lodge that has since been transformed into a 12-villa resort.",
+         "categories" : [ "India", "Asia", "vacation" ],
+         "location" : "Rajasthan, India",
+         "lat" : 0,
+         "lon" : 0
+      },
+      {
+         "title" : "South Pacific Island Guide",
+         "image" : "http://photos.cntraveler.com/2014/07/31/53d9bf42dcd5888e14599164_moorea-hilton-775.jpg",
+         "description" : "Our guide to the South Pacific includes coverage of Bora Bora, Tahiti, Moorea, Fiji, the Cook Islands, Samoa and Vanuatu.",
+         "categories" : [ "Polynesia", "hotels", "vacation" ],
+         "location" : "Moorea, French Polynesia",
+         "lat" : 0,
+         "lon" : 0
+      },
+      {
+         "title" : "Places Where It's Never Cold: The Seychelles",
+         "image" : "http://photos.cntraveler.com/2014/07/31/53da9911dcd5888e145bf3bb_2-la-digue-island-seychelles.jpg",
+         "description" : "Giant tortoises, coconut crabs, and black parrots claim this idyllic archipelago as home, due north of Madagascar.",
+         "categories" : [ "The Seychelles", "islands", "beaches" ],
+         "location" : "The Seychelles",
+         "lat" : 0,
+         "lon" : 0
+      },
+      {
+         "title" : "Camping in Style in a Remote South Tanzanian Desert",
+         "image" : "http://photos.cntraveler.com/2014/11/21/546f75772a3d21fa285c9205_bedroom-kigelia-ruaha-safari-camp-tanzania.jpg",
+         "description" : "Want to experience life as a desert nomad? Head to safari camp Kigelia Ruaha in southern Tanzania, where adventure doesn’t compromise comfort and style.",
+         "categories" : [ "Africa", "Tanzania", "Adventure" ],
+         "location" : "Tanzania",
+         "lat" : 0,
+         "lon" : 0
+      },
+      {
+         "title" : "The Best Beachside Bars and Restaurants in the Caribbean",
+         "image" : "http://photos.cntraveler.com/2014/07/31/53da39ce6dec627b149dd364_sonia-rican-no-shoes.jpg",
+         "description" : "When galloping gourmet Anthony Bourdain ate at this Playa Jobos spot, he declared >>Food tastes better when you're not wearing shoes.<<",
+         "categories" : [ "food", "tips", "The Caribbean" ],
+         "location" : "The Caribbean",
+         "lat" : 0,
+         "lon" : 0
+      },
+      {
+         "title" : "New Zealand's Otherworldly Landscapes",
+         "image" : "http://photos.cntraveler.com/2014/07/31/53dab1736dec627b149fbec7_boardwalk-awaroa-bay-abel-tasman-national-park-new-zealand-0512.jpg",
+         "description" : "A boardwalk leads to a restored homestead in Abel Tasman National Park at Awaroa Bay, where some of the land is privately owned.",
+         "categories" : [ "New Zealand", "islands", "beach" ],
+         "location" : "Awaroa Bay, New Zealand",
+         "lat" : 0,
+         "lon" : 0
+      },
+        {
+         "title" : "The Cove Atlantis",
+         "image" : "http://media-cache-ak0.pinimg.com/236x/17/8b/45/178b45936efa45fcb19e6b732dc387fb.jpg",
+         "description" : "Atlantis Resort in Nassau, Bahamas. Been here twice - would go back a thousand times.",
+         "categories" : [ "vacation", "hotels" ],
+         "location" : "Nassau, Bahamas",
+         "lat" : 0,
+         "lon" : 0
+      },
+      {
+         "title" : "Jellyfish Lake",
+         "image" : "http://media-cache-ak0.pinimg.com/236x/f5/e3/9d/f5e39db43780a0b0a9916e909d799c70.jpg",
+         "description" : "Jellyfish Lake in Palau - one of the top diving destinations in the world. The jellyfish that live have lost their sting and are completely harmless making them the perfect swimming companions.",
+         "categories" : [ "lake", "diving" ],
+         "location" : "Eil Malk, Palau",
+         "lat" : 0,
+         "lon" : 0
+      },
+      {
+         "title" : "Lake Louise",
+         "image" : "http://media-cache-ec0.pinimg.com/236x/0d/d1/80/0dd18068a23f003cc6e6639ed07814e6.jpg",
+         "description" : "Lake Louise, Canada - Coolest Honeymoon Destinations of 2014! #travel #wedding #romance",
+         "categories" : [ "lake", "romance" ],
+         "location" : "Lake Louise, Canada",
+         "lat" : 0,
+         "lon" : 0
+      },
+      {
+         "title" : "Pictured Rocks National Lakeshore",
+         "image" : "http://media-cache-ec0.pinimg.com/236x/90/0f/17/900f17a5d3c4c3de78a67d95a461fc18.jpg",
+         "description" : "Kayaking along Pictured Rocks National Lakeshore, Michigan",
+         "categories" : [ "sports", "lake" ],
+         "location" : "Gladstone, USA",
+         "lat" : 0,
+         "lon" : 0
+      },
+      {
+         "title" : "Explore Kenya",
+         "image" : "http://www.travelandleisure.com/images/amexpub/0009/3507/200911-w-trips-kenya-micato.jpg",
+         "description" : "Spot lions, then plant trees at a community center in Nairobi.",
+         "categories" : [ "wildlife", "Africa" ],
+         "location" : "Nairobi, Kenya",
+         "lat" : 0,
+         "lon" : 0
+      },
+      {
+         "title" : "Wall of China",
+         "image" : "http://i1.wp.com/gloholiday.com/wp-content/uploads/2013/07/Wall-of-China.jpg",
+         "description" : "Great Wall of China has been included in UNESCO’s world heritage list and shows that man and nature have worked together and added a masterpiece to the list of the most breathtaking sights.",
+         "categories" : [ "wonders", "east" ],
+         "location" : "Xinzhou, China",
+         "lat" : 0,
+         "lon" : 0
+      },
+      {
+         "title" : "Explore Havana",
+         "image" : "http://media-cache-ak0.pinimg.com/236x/38/ec/37/38ec376b794073fee036d897346f7de2.jpg",
+         "description" : "Havana, Cuba - One of the most photogenic and beautiful cities in the world.",
+         "categories" : [ "caribbean", "photo" ],
+         "location" : "Havana, Cuba",
+         "lat" : 0,
+         "lon" : 0
+      },
+      {
+         "title" : "A majestic Lake in Italy",
+         "image" : "http://media-cache-ec0.pinimg.com/236x/fe/6c/f5/fe6cf5ddface5f3c3f42880872004922.jpg",
+         "description" : "Without a doubt Lake Como is the most famous of all of Italy’s lakes. While it is the third largest lake in Italy, it is one of Europe’s deepest and most beautiful.",
+         "categories" : [ "lake", "romance" ],
+         "location" : "Lake Como, Italy",
+         "lat" : 0,
+         "lon" : 0
+      },
+      {
+         "title" : "A fascianting place to visit",
+         "image" : "http://media-cache-ak0.pinimg.com/236x/29/4e/86/294e86c24421a1afde0e8b278b7f3255.jpg",
+         "description" : "Bora Bora said to have emerged three million years back due to geological phenomenon and is mid way between a high island and atoll",
+         "categories" : [ "island", "flora" ],
+         "location" : "Bora Bora, France",
+         "lat" : 0,
+         "lon" : 0
+      },
+      {
+         "title" : "The best city for book lovers",
+         "image" : "http://media-cache-ak0.pinimg.com/236x/ef/e9/54/efe95403096f749d544da16cad63895f.jpg",
+         "description" : " To honor one the author and his sacrifices, admirers celebrate Dostoyevsky Day in St. Petersburg. Held the first Saturday of every July, fans gather across the city to celebrate their hero.",
+         "categories" : [ "city", "book" ],
+         "location" : "St. Petersburg, Russia",
+         "lat" : 0,
+         "lon" : 0
+      },
+      {
+         "title" : "Explore Serengeti",
+         "image" : "http://media-cache-ak0.pinimg.com/236x/2a/4a/19/2a4a194db398d354af6f7d4dbb9cff18.jpg",
+         "description" : "The Serengeti hosts the largest terrestrial mammal migration in the world, which helps secure it as one of the Seven Natural Wonders of Africa and one of the ten natural travel wonders of the world.",
+         "categories" : [ "Africa", "fauna" ],
+         "location" : "Serengeti, Tanzania",
+         "lat" : 0,
+         "lon" : 0
+      }
+   ],
+   "status" : "OK"
+}
