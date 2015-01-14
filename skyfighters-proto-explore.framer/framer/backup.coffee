@@ -627,8 +627,8 @@ makePOILayer = (fromX, fromY, fromWidth, fromHeight, dataId) ->
 	
 	# Hide selected & map if scrolled
 	relatedCardsGrid.on Events.Scroll, ->		
-		map.opacity = selectedCardsStack.opacity = Utils.modulate(relatedCardsGrid.scrollY, [0, cardHeight * 2], [1, 0], true)
-		map.blur    = selectedCardsStack.blur    = Utils.modulate(relatedCardsGrid.scrollY, [0, cardHeight * 2], [0, 10], true)
+		map.opacity = selectedCardsStack.opacity = Utils.modulate(relatedCardsGrid.scrollY, [0, cardHeight], [1, 0], true)
+		map.blur    = selectedCardsStack.blur    = Utils.modulate(relatedCardsGrid.scrollY, [0, cardHeight], [0, 10], true)
 		
 		# reorder layers when scrolled
 		if relatedCardsGrid.scrollY > 0
